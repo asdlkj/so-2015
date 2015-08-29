@@ -11,7 +11,7 @@ SchedRR::SchedRR(vector<int> argn) {
 	cant_cores = argn[0];
 	cpu_quantum = argn[1];
 	for(int i = 0; i < cant_cores; i++){
-		pid_cores.push_back(IDLE_TASK);
+		pid_cores.push_back(IDLE_TASK);  		//Los cores que no tengan un proceso ejecutando le ponemos la tarea idle
 		cores_bloqueados.push_back(false);
 		quantum_restantes.push_back(0);
 
@@ -48,7 +48,7 @@ void SchedRR::load(int pid) {
 void SchedRR::unblock(int pid) {
 	bool laEncontre = false;
 	int i = 0;
-	while(i < cant_cores && !laEncontre){
+	while(i < cant_cores && !laEncontre){   //Busco el core donde se esta ejecutando y lo marco como no bloqueado
 		if(pid_cores[i] == pid){
 			laEncontre = true;
 			cores_bloqueados[i] = false;
@@ -59,9 +59,9 @@ void SchedRR::unblock(int pid) {
 
 int SchedRR::tick(int cpu, const enum Motivo m) {
 	if(m == TICK){
-		if(!cores_bloqueados[cpu]){   //Si el core esta ejecutando un proceso bloqueado entonces no se hace nada.
+		if(!cores_bloqueados[cpu]){   //Si el core esta ejecutando un proceso bloqueado, entonces no se hace nada.
 			quantum_restantes[cpu]--;
-			if(quantum_restantes[cpu] == 0){
+			if(quantum_restantes[cpu] == 0){ //Si se me acabo el tiempo, entonces lo guardo en la cola global y pongo el siguiente a ejecutar en ese core
 				enEspera.push(pid_cores[cpu]);
 				pid_cores[cpu] = enEspera.front();
 				enEspera.pop();
@@ -71,7 +71,7 @@ int SchedRR::tick(int cpu, const enum Motivo m) {
 	}
 	else if(m == BLOCK){
 		quantum_restantes[cpu]--;
-		cores_bloqueados[cpu] = true;
+		cores_bloqueados[cpu] = true;   //Lo marco como bloqueado
 	}
 	else if(m == EXIT){
 		pid_cores[cpu] = IDLE_TASK;

@@ -20,7 +20,7 @@ class SchedRR : public SchedBase {
 		vector<int> quantum_restantes;
 		int cant_cores;
 		int cpu_quantum;
-		queue<int> enEspera;
+		queue<int> enEspera;  //Cola global
 };
 
 #endif
