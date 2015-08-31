@@ -23,12 +23,15 @@ SchedRR2::~SchedRR2() {
 }
 
 void SchedRR2::load(int pid) {
+	//Busco el nucleo que tenga menos procesos.
 	int indice_resultado = 0;
 	for(int i = 1; i < cant_cores; i++){
 		if(nucleos[i].enEspera.size() < nucleos[indice_resultado].enEspera.size()){
 			indice_resultado = i;
 		}
 	}
+
+
 	if(nucleos[indice_resultado].pidActual == IDLE_TASK){
 		nucleos[indice_resultado].pidActual = pid;
 		nucleos[indice_resultado].quantum_restante_actual = cpu_quantum;
