@@ -1,0 +1,18 @@
+
+\section{Ejercicio 1}
+
+
+\subsection{Desarrollo}
+
+
+\subsection{Experimentación}
+Para cumplir con lo pedido en el ejercicio utilizaremos el lote de tareas loteEj1.tsk, la representación del mismo usando la política FCFS es la siguiente:
+
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=1.1\textwidth]{imagenes/ExEj1.png}
+  \caption{loteEj1.tsk con FCFS}
+\end{figure}
+
+Con este gráfico 
