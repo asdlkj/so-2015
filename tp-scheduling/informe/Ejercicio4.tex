@@ -1,25 +1,22 @@
 \section{Ejercicio 4}
 
 \subsection{Desarrollo}
+El ejercicio consiste en programar un scheduler de Round-Robin, para esto utilizaremos las siguientes estructuras: vector de enteros pid$\_$cores, vector de booleanos cores$\_$bloqueados, vector de enteros quantum$\_$restantes, entero cant$\_$cores, entero cpu$\_$quantum, Una cola de enteros enEspera.
 
-El ejercicio consiste en programar un scheduler de Round-Robin, para esto utilizaremos las siguientes estructuras:
-		vector<int> pid_cores;
-		vector<bool> cores_bloqueados;
-		vector<int> quantum_restantes;
-		int cant_cores;
-		int cpu_quantum;
-		queue<int> enEspera;
+Cuando creamos el scheduler se nos dan la cantidad de cores(que será cant$\_$cores) y el quantum de los cpus(cpu$\_$quantum). Segun el enunciado los procesos están agrupados en una única cola, de ahí viene enEspera. Como conocemos la cantidad de cores usamos tres estructuras de vectores para, solo teniendo el numero del cpu, poder acceder a la información de las mismas. cores$\_$bloqueados nos indica si el proceso del núcleo en cuestión está o no bloqueado, pid$\_$cores nos da el pid del proceso que esta corriendo en el cpu y quantum$\_$restantes nos dice cuanto tiempo le queda por ejecutar hasta terminar.
+En el programa load en el cual tenemos que poner un proceso en el scheduler lo que haremos será buscar si hay algún core en pid$\_$cores que tenga cargada la tarea IDLE.
+ 
+Si lo encontramos, cargamos el proceso en ese core poniéndolo en pid$\_$cores y dándole al quantum$\_$restantes de ese proceso el valor de cpu$\_$quantum ya que es una tarea que está por comenzar a ejecutar. Caso contrario, simplemente lo encolamos en enEspera para ser ejecutada cuando sea su turno.
+En el caso de unblock lo que hacemos es buscar entre los cores cual es el que tiene cargado el proceso que se desea bloquear(en pid$\_$cores), una vez encontrado acceder a su posición en cores$\_$bloqueados y asignarle true.
+Por último tenemos el programa tick que se encarga de realizar los procedimientos pertinentes en cada tick de reloj. Tenemos tres casos de motivos:
+ 
+TICK: en el mismo sabemos que ha pasado un tick de reloj y debemos disminuir los cuantos que le quedan al procedimiento del cpu. En el caso de que estos terminen en 0 debemos plantearnos si debemos desalojar la tarea para poner otra. Si se da el caso de que el proceso está bloqueado entonces no realizamos ninguno de estos procesos ni disminuimos el quantum.
 
-Cuando creamos el scheduler se nos dan la cantidad de cores(que será cant_cores) y el quantum de los cpus(cpu_quantum). Segun el enunciado los procesos estan agrupados en 
-una unica cola, de ahi viene enEspera. Como conocemos la cantidad de cores usamos tres estructuras de vectores para, solo teniendo el numero del cpu, poder acceder a la información
-de las mismas. cores_bloqueados nos indica si el proceso del nucleo en cuestion está o no bloqueado, pid_cores nos da el pid del proceso que esta corriendo en el cpu y
-quantum_restantes nos dice cuanto tiempo le queda por ejecutar hasta terminar.
+BLOCK: Disminuimos el quantum restante y bloqueamos el core(poniendo true en cores$\_$bloqueados).
 
-En el programa load en el cual tenemos que poner un proceso en el scheduler lo que haremos será buscar si hay algún core en pid_cores que tenga cargada la tarea IDLE. 
-Si lo encontramos, cargamos el proceso en ese core poniendolo en pid_cores y dandole al quantum_restantes de ese proceso el valor de cpu_quantum ya que es una tarea que está
-por comenzar a ejecutar. Caso contrario, simplemente lo encolamos en enEspera para ser ejecurada cuando le toque.
-
-
+EXIT: Colocamos en el core la tarea IDLE y si la cola no está vacía, le asignamos la tarea que se encuentre próxima en ella. Después reseteamos los quantum del proceso. 
 
 
 \subsection{Experimentación}
+Para poder probar el correcto funcionamiento de la estructura se realizo una serie de experimentos, los mismos consisten en ejecutar el schedule con distintos lotes de tareas que poseemos, también variamos la cantidad de cores. 
+
