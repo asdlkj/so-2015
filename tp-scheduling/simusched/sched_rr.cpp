@@ -32,7 +32,6 @@ void SchedRR::load(int pid) {
 			pid_cores[i] = pid;
 			encontreUno = true;
 			quantum_restantes[i] = cpu_quantum;
-			cores_bloqueados[i] = true;
 		}
 		else{
 			i++;

@@ -2,5 +2,24 @@
 
 \subsection{Desarrollo}
 
+El ejercicio consiste en programar un scheduler de Round-Robin, para esto utilizaremos las siguientes estructuras:
+		vector<int> pid_cores;
+		vector<bool> cores_bloqueados;
+		vector<int> quantum_restantes;
+		int cant_cores;
+		int cpu_quantum;
+		queue<int> enEspera;
+
+Cuando creamos el scheduler se nos dan la cantidad de cores(que será cant_cores) y el quantum de los cpus(cpu_quantum). Segun el enunciado los procesos estan agrupados en 
+una unica cola, de ahi viene enEspera. Como conocemos la cantidad de cores usamos tres estructuras de vectores para, solo teniendo el numero del cpu, poder acceder a la información
+de las mismas. cores_bloqueados nos indica si el proceso del nucleo en cuestion está o no bloqueado, pid_cores nos da el pid del proceso que esta corriendo en el cpu y
+quantum_restantes nos dice cuanto tiempo le queda por ejecutar hasta terminar.
+
+En el programa load en el cual tenemos que poner un proceso en el scheduler lo que haremos será buscar si hay algún core en pid_cores que tenga cargada la tarea IDLE. 
+Si lo encontramos, cargamos el proceso en ese core poniendolo en pid_cores y dandole al quantum_restantes de ese proceso el valor de cpu_quantum ya que es una tarea que está
+por comenzar a ejecutar. Caso contrario, simplemente lo encolamos en enEspera para ser ejecurada cuando le toque.
+
+
+
 
 \subsection{Experimentación}
