@@ -20,6 +20,9 @@ simu.o: simu.cpp simu.h basetask.h basesched.h
 simusched.o: simusched.cpp basetask.h basesched.h tasks.h
 tasks.o: tasks.cpp tasks.h basetask.h
 
+Ejercicio 1:./simusched Lotes/loteEj1.tsk 1 1 1 SchedFCFS | ./graphsched.py > Resultados\ de\ los\ Experimentos/Ej1.png; display Resultados\ de\ los\ Experimentos/Ej1.png 
+
+
 clean:
 	rm -f $(OBJS) $(MAIN)
 
