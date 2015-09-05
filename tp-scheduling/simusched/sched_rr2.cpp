@@ -69,6 +69,7 @@ int SchedRR2::tick(int cpu, const enum Motivo m) {
 				nucleos[cpu].enEspera.push(nucleos[cpu].pidActual);
 				nucleos[cpu].pidActual = nucleos[cpu].enEspera.front();
 				nucleos[cpu].enEspera.pop();
+				nucleos[cpu].bloqueado = false;
 				nucleos[cpu].quantum_restante_actual = cpu_quantum;
 			}
 		}
@@ -79,6 +80,9 @@ int SchedRR2::tick(int cpu, const enum Motivo m) {
 	}
 	else if(m == EXIT){
 		nucleos[cpu].pidActual = IDLE_TASK;
+		if(nucleos[cpu].bloqueado){
+			nucleos[cpu].bloqueado = false;
+		}
 		if(!nucleos[cpu].enEspera.empty()){
 			nucleos[cpu].pidActual = nucleos[cpu].enEspera.front();
 			nucleos[cpu].enEspera.pop();

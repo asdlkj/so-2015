@@ -21,6 +21,7 @@ simusched.o: simusched.cpp basetask.h basesched.h tasks.h
 tasks.o: tasks.cpp tasks.h basetask.h
 
 Ejercicio 1: ./simusched Lotes/loteEj1.tsk 1 1 1 SchedFCFS | ./graphsched.py > Resultados\ de\ los\ Experimentos/Ej1.png; display Resultados\ de\ los\ Experimentos/Ej1.png 
+Ejericio 3: ./simusched Lotes/loteEj3Experimento1.tsk 2 1 1 SchedFCFS | ./graphsched.py > Resultados\ de\ los\ Experimentos/Ej3Experimento1.png; display Resultados\ de\ los\ Experimentos/Ej3Experimento1.png 
 Ejercicio 8 costoso: ./simusched Lotes/loteEj8Experimento1.tsk 2 1 1 SchedRR2 | ./graphsched.py > Resultados\ de\ los\ Experimentos/Ej8Experimento1.png; display Resultados\ de\ los\ Experimentos/Ej8Experimento1.png 
 Ejercicio 8 barato: ./simusched Lotes/loteEj8Experimento2.tsk 2 1 1 SchedRR2 | ./graphsched.py > Resultados\ de\ los\ Experimentos/Ej8Experimento2.png; display Resultados\ de\ los\ Experimentos/Ej8Experimento2.png 
 

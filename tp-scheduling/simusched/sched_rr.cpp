@@ -64,6 +64,7 @@ int SchedRR::tick(int cpu, const enum Motivo m) {
 				enEspera.push(pid_cores[cpu]);
 				pid_cores[cpu] = enEspera.front();
 				enEspera.pop();
+				cores_bloqueados[cpu] = false;
 				quantum_restantes[cpu] = cpu_quantum;
 			}
 		}
@@ -74,6 +75,9 @@ int SchedRR::tick(int cpu, const enum Motivo m) {
 	}
 	else if(m == EXIT){
 		pid_cores[cpu] = IDLE_TASK;
+		if(cores_bloqueados[cpu] = false){
+			cores_bloqueados[cpu] = false;
+		}
 		if(!enEspera.empty()){
 			pid_cores[cpu] = enEspera.front();
 			enEspera.pop();
