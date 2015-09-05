@@ -14,4 +14,25 @@ Por último tenemos la función tick. El código es equivalente al del ejercicio
 
 
 \subsection{Experimentación}
-Según lo pedido debemos mencionar un caso donde la 
+Según lo pedido debemos mencionar un caso donde la migración de nucleos sea beneficiosa y otro donde no. Para lo segundo, usaremos dos core y cuatro tareas que iran apereciendo
+en este orden: la más costosa,  la menos costosa, la segunda más costosa y la segunda menos costosa. Usaremos, en los dos cores, un quantum de 20 y nos queda lo siguiente:
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=1.1\textwidth]{imagenes/Ej8Experimento1.png}
+  \caption{loteEj8Experimento1.tsk con RR2}
+\end{figure}
+
+Para el caso en el que sea beneficiosa vamos a usar el mismo lote de tareas, pero las cambiaremos de orden para que sean así: 
+la más costosa, la segunda más costosa, la menos costosa y la segunda menos costosa. Nos queda lo siguiente:
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=1.1\textwidth]{imagenes/Ej8Experimento2.png}
+  \caption{loteEj8Experimento2.tsk con RR2}
+\end{figure}
+
+Podemos ver que efectivamente el primer gráfico muestra que se tarda más en completar los procesos. Esto se debe a que el orden que le dimos a las tareas hace que el primer
+procesador se le asigne las tareas más largas y costosas, mientras que el segundo tiene las más cortas. En ese sentido se muestra como la mayor parte del trabajo recae en uno de ellos
+mientras que el otro termina y queda en ready mucho más rapido. Para el segundo experimento, al cambiar el orden podemos apreciar que los dos procesadores tienen una tarea
+muy costosa y otra no tanto. Efectivamente termina más rápido ya que el trabajo se distribuye de forma más justa.
