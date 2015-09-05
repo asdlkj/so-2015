@@ -16,11 +16,11 @@ class SchedRR : public SchedBase {
 		virtual int tick(int cpu, const enum Motivo m);
 	private:
 		vector<int> pid_cores;
-		vector<bool> cores_bloqueados;
+		vector<int> pid_bloqueados;  //Los procesos que estan bloqueados.
 		vector<int> quantum_restantes;
 		int cant_cores;
 		int cpu_quantum;
-		queue<int> enEspera;  //Cola global
+		queue<int> enEspera;  //Cola global donde estan los que estan en ready
 };
 
 #endif
