@@ -27,7 +27,7 @@ void TaskAlterno(int pid, vector<int> params) { // params: ms_pid, ms_io, ms_pid
 void TaskConsola(int pid, vector<int> params){//params: n, bmin y bmax
 	srand(time(NULL));
 	for(int i = 0; i < params[0]; i++ ){
-		int tiempoBloqueado = rand()%(params[2]-params[1] + 1) + params[1];
+		int tiempoBloqueado = (rand()%params[2]) + params[1];
 		uso_IO(pid, tiempoBloqueado);
 	}	
 }
