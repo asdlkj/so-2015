@@ -20,10 +20,27 @@ simu.o: simu.cpp simu.h basetask.h basesched.h
 simusched.o: simusched.cpp basetask.h basesched.h tasks.h
 tasks.o: tasks.cpp tasks.h basetask.h
 
-Ejercicio 1: ./simusched Lotes/loteEj1.tsk 1 1 1 SchedFCFS | ./graphsched.py > Resultados\ de\ los\ Experimentos/Ej1.png; display Resultados\ de\ los\ Experimentos/Ej1.png 
-Ejericio 3: ./simusched Lotes/loteEj3Experimento1.tsk 2 1 1 SchedFCFS | ./graphsched.py > Resultados\ de\ los\ Experimentos/Ej3Experimento1.png; display Resultados\ de\ los\ Experimentos/Ej3Experimento1.png 
-Ejercicio 8 costoso: ./simusched Lotes/loteEj8Experimento1.tsk 2 1 1 SchedRR2 | ./graphsched.py > Resultados\ de\ los\ Experimentos/Ej8Experimento1.png; display Resultados\ de\ los\ Experimentos/Ej8Experimento1.png 
-Ejercicio 8 barato: ./simusched Lotes/loteEj8Experimento2.tsk 2 1 1 SchedRR2 | ./graphsched.py > Resultados\ de\ los\ Experimentos/Ej8Experimento2.png; display Resultados\ de\ los\ Experimentos/Ej8Experimento2.png 
+ejercicio1: 
+	./simusched Lotes/loteEj1.tsk 1 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej1.png 
+ejericio2: 
+	./simusched Lotes/loteEj3Experimento1.tsk 2 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png 
+ejercicio3:
+	./simusched Lotes/loteEj3Experimento1.tsk 2 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png 
+
+ejercicio4:
+	./simusched Lotes/loteEj3Experimento1.tsk 2 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png 
+ejercicio5:
+	./simusched Lotes/loteEj5.tsk 1 2 1 SchedRR 2 | ./graphsched.py > Lotes/imagenes/Ej5_q2.png 
+	./simusched Lotes/loteEj5.tsk 1 2 1 SchedRR 10 | ./graphsched.py > Lotes/imagenes/Ej5_q10.png 
+	./simusched Lotes/loteEj5.tsk 1 2 1 SchedRR 50 | ./graphsched.py > Lotes/imagenes/Ej5_q50.png 
+ejercicio6:
+	./simusched Lotes/loteEj5.tsk 1 2 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej6.png 
+ejercicio7:
+	./simusched Lotes/loteEj7.tsk 1 1 1 SchedMistery 2 | ./graphsched.py > Lotes/imagenes/Ej7.png 
+	./simusched Lotes/loteEj7.tsk 1 1 1 SchedNoMistery 2 | ./graphsched.py > Lotes/imagenes/Ej7.png 
+ejercicio8:
+	./simusched Lotes/loteEj8Experimento1.tsk 2 1 1 SchedRR2 | ./graphsched.py > Lotes/imagenes/Ej8Experimento1.png
+	./simusched Lotes/loteEj8Experimento2.tsk 2 1 1 SchedRR2 | ./graphsched.py > Lotes/Ej8Experimento2.png
 
 clean:
 	rm -f $(OBJS) $(MAIN)
