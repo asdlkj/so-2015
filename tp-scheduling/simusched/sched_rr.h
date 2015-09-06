@@ -16,6 +16,8 @@ class SchedRR : public SchedBase {
 		virtual int tick(int cpu, const enum Motivo m);
 	private:
 		bool estaBloqueado(int pid);
+		void SiEstaBloqueadoQuitar(int pid);
+		
 		vector<int> pid_cores;
 		vector<int> pid_bloqueados;  //Los procesos que estan bloqueados.
 		vector<int> quantum_restantes;

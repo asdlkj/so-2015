@@ -24,19 +24,19 @@ SchedRR::~SchedRR() {
 
 
 void SchedRR::load(int pid) {
-	int i = 0;
-	bool loEncontre = false;
-	while(i < pid_cores.size() && !loEncontre){
-		if(pid_cores[i] == IDLE_TASK){
-			pid_cores[i] = pid;
-			quantum_restantes[i] = cpu_quantum;
-			loEncontre = true;
-		}
-		i++;
-	}
-	if(!loEncontre){
+	// int i = 0;
+	// bool loEncontre = false;
+	// while(i < pid_cores.size() && !loEncontre){
+	// 	if(pid_cores[i] == IDLE_TASK){
+	// 		pid_cores[i] = pid;
+	// 		quantum_restantes[i] = cpu_quantum;
+	// 		loEncontre = true;
+	// 	}
+	// 	i++;
+	// }
+	// if(!loEncontre){
 		enEspera.push(pid);
-	}
+	//}
 }
 
 
@@ -65,19 +65,38 @@ bool SchedRR::estaBloqueado(int pid){
 	return loEncontre;
 }
 
+void SchedRR::SiEstaBloqueadoQuitar(int pid){
+	bool loEncontre = false;
+	int i = 0;
+	while(i < pid_bloqueados.size() && !loEncontre){
+		if(pid_bloqueados[i] == pid){
+			loEncontre = true;
+			pid_bloqueados.erase(pid_bloqueados.begin() + i);
+		}
+		i++;
+	}
+}
+
 int SchedRR::tick(int cpu, const enum Motivo m) {
 	if(m == TICK){
 		quantum_restantes[cpu]--;
 		if(quantum_restantes[cpu] <= 0){
-			enEspera.push(pid_cores[cpu]);
-			pid_cores[cpu] = enEspera.front();
-			enEspera.pop();
-			quantum_restantes[cpu] = cpu_quantum;
+			if(pid_cores[cpu] != IDLE_TASK){
+				enEspera.push(pid_cores[cpu]);
+			}
+			if(!enEspera.empty()){
+				pid_cores[cpu] = enEspera.front();
+				enEspera.pop();
+				quantum_restantes[cpu] = cpu_quantum;	
+			}
+			
+			
 		}
 	}
 	else if(m == BLOCK){
-		if(!estaBloqueado(pid_cores[cpu])){
-			pid_bloqueados.push_back(pid_cores[cpu]);	
+		if(!estaBloqueado(pid_cores[cpu])){ //Si no esta bloqueada lo bloqueo
+			pid_bloqueados.push_back(pid_cores[cpu]);
+			quantum_restantes[cpu] = 0;	
 		}
 		
 		if(!enEspera.empty()){
@@ -88,7 +107,12 @@ int SchedRR::tick(int cpu, const enum Motivo m) {
 		
 	}
 	else if(m == EXIT){
+		SiEstaBloqueadoQuitar(pid_cores[cpu]);
+
+		
 		pid_cores[cpu] = IDLE_TASK;
+		quantum_restantes[cpu] = 0;	
+
 		if(!enEspera.empty()){
 			pid_cores[cpu] = enEspera.front();
 			enEspera.pop();

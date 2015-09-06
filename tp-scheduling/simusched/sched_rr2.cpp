@@ -53,43 +53,74 @@ void SchedRR2::load(int pid) {
 }
 
 void SchedRR2::unblock(int pid) {
-	bool laEncontre = false;
 	int i = 0;
-	while(i < cant_cores && !laEncontre){   //Busco el core donde se esta ejecutando y lo marco como no bloqueado
-		if(nucleos[i].pidActual == pid){
-			laEncontre = true;
-			//nucleos[i].bloqueado = false;
+	int cpu = dondeSeEncuentraBloqueado(pid);
+	bool loEncontre = false;
+	while(i < nucleos[cpu].pid_bloqueados.size() && !loEncontre){
+		if(nucleos[cpu].pid_bloqueados[i] == pid){
+			nucleos[cpu].pid_bloqueados.erase(nucleos[cpu].pid_bloqueados.begin() + i);
+			nucleos[cpu].enEspera.push(pid);
+			loEncontre = true;
 		}
 		i++;
 	}
 }
 
+int SchedRR2::dondeSeEncuentraBloqueado(int pid){
+	int cpu;
+	bool loEncontre = false;
+	for(int i = 0; (i < nucleos.size() && !loEncontre); i++){
+		for(int j = 0; (j < nucleos[i].pid_bloqueados.size() && !loEncontre); j++){
+			if(nucleos[i].pid_bloqueados[j] == pid){
+				loEncontre = true;
+				cpu = i;
+			}
+		}
+	}
+
+	return cpu;
+}
+
+bool SchedRR2::estaBloqueado(int pid, int cpu){
+	bool loEncontre = false;
+	int i = 0;
+	while(i < nucleos[cpu].pid_bloqueados.size() && !loEncontre){
+		if(nucleos[cpu].pid_bloqueados[i] == pid){
+			loEncontre = true;
+		}
+		i++;
+	}
+	return loEncontre;
+}
+
 int SchedRR2::tick(int cpu, const enum Motivo m) {
 	if(m == TICK){
-		//if(!nucleos[cpu].bloqueado){   //Si el core esta ejecutando un proceso bloqueado, entonces no se hace nada.
-			nucleos[cpu].quantum_restante_actual--;
-			if(nucleos[cpu].quantum_restante_actual == 0){ //Si se me acabo el tiempo, entonces lo guardo en la cola global y pongo el siguiente a ejecutar en ese core
-				nucleos[cpu].enEspera.push(nucleos[cpu].pidActual);
-				nucleos[cpu].pidActual = nucleos[cpu].enEspera.front();
-				nucleos[cpu].enEspera.pop();
-				//nucleos[cpu].bloqueado = false;
-				nucleos[cpu].quantum_restante_actual = cpu_quantum;
-			}
-		//}
+		nucleos[cpu].quantum_restante_actual--;
+		if(nucleos[cpu].quantum_restante_actual <= 0){
+			nucleos[cpu].enEspera.push(nucleos[cpu].pidActual);
+			nucleos[cpu].pidActual = nucleos[cpu].enEspera.front();
+			nucleos[cpu].enEspera.pop();
+			nucleos[cpu].quantum_restante_actual = cpu_quantum;
+		}
 	}
 	else if(m == BLOCK){
-		nucleos[cpu].quantum_restante_actual--;
-		//nucleos[cpu].bloqueado = true;   //Lo marco como bloqueado
-	}
-	else if(m == EXIT){
-		nucleos[cpu].pidActual = IDLE_TASK;
-		//if(nucleos[cpu].bloqueado){
-			//nucleos[cpu].bloqueado = false;
-		//}
+		if(!estaBloqueado(nucleos[cpu].pidActual, cpu)){
+			nucleos[cpu].pid_bloqueados.push_back(nucleos[cpu].pidActual);	
+		}
+		
 		if(!nucleos[cpu].enEspera.empty()){
 			nucleos[cpu].pidActual = nucleos[cpu].enEspera.front();
 			nucleos[cpu].enEspera.pop();
 			nucleos[cpu].quantum_restante_actual = cpu_quantum;
+		}
+		
+	}
+	else if(m == EXIT){
+		nucleos[cpu].pidActual = IDLE_TASK;
+		if(!nucleos[cpu].enEspera.empty()){
+			nucleos[cpu].pidActual = nucleos[cpu].enEspera.front();
+			nucleos[cpu].enEspera.pop();
+			nucleos[cpu].quantum_restante_actual= cpu_quantum;
 		}
 
 	}

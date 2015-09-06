@@ -16,6 +16,9 @@ class SchedRR2 : public SchedBase {
 		virtual int tick(int cpu, const enum Motivo m);
 
 	private:
+
+		bool estaBloqueado(int pid, int cpu);
+		int dondeSeEncuentraBloqueado(int pid);
 		struct core
 		{
 			int pidActual;
