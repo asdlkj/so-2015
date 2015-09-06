@@ -42,13 +42,9 @@ void SchedRR2::load(int pid) {
 	}
 
 
-	if(nucleos[indice_resultado].pidActual == IDLE_TASK){
-		nucleos[indice_resultado].pidActual = pid;
-		nucleos[indice_resultado].quantum_restantes = cpu_quantum;
-	}
-	else{
-		nucleos[indice_resultado].enEspera.push(pid);
-	}
+	
+	nucleos[indice_resultado].enEspera.push(pid);
+	
 	
 }
 
