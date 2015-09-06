@@ -43,7 +43,7 @@ ejercicio7:
 	./simusched Lotes/loteEj7.tsk 1 1 1 SchedNoMistery 2 | ./graphsched.py > Lotes/imagenes/Ej7.png 
 ejercicio8:
 	./simusched Lotes/loteEj8Experimento1.tsk 2 1 1 SchedRR2 5 5| ./graphsched.py > Lotes/imagenes/Ej8Experimento1.png
-	./simusched Lotes/loteEj8Experimento2.tsk 2 1 1 SchedRR2 5 5| ./graphsched.py > Lotes/Ej8Experimento2.png
+	./simusched Lotes/loteEj8Experimento2.tsk 2 1 1 SchedRR2 5 5| ./graphsched.py > Lotes/imagenes/Ej8Experimento2.png
 
 clean:
 	rm -f $(OBJS) $(MAIN)
