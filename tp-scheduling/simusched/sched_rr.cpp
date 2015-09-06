@@ -24,7 +24,7 @@ SchedRR::~SchedRR() {
 
 
 void SchedRR::load(int pid) {
-	int i = 0;
+/*	int i = 0;
 	bool loEncontre = false;
 	while(i < pid_cores.size() && !loEncontre){
 		if(pid_cores[i] == IDLE_TASK || estaBloqueado(pid_cores[i])){
@@ -33,10 +33,10 @@ void SchedRR::load(int pid) {
 			loEncontre = true;
 		}
 		i++;
-	}
-	if(!loEncontre){
+	}*/
+//	if(!loEncontre){
 		enEspera.push(pid);
-	}
+//	}
 }
 
 
