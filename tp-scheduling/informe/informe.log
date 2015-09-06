@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.5.15)  6 SEP 2015 01:14
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.5.15)  6 SEP 2015 11:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -686,9 +686,9 @@ Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
 \listing@line=\count159
 )
 \verbatim@out=\write4
-runsystem(touch w18-test-20159674.tex)...disabled (restricted).
+runsystem(touch w18-test-201596671.tex)...disabled (restricted).
 
-runsystem(rm -f w18-test-20159674.tex)...disabled (restricted).
+runsystem(rm -f w18-test-201596671.tex)...disabled (restricted).
 
 
 
@@ -852,10 +852,9 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
 ABD: EveryShipout initializing macros
-<imagenes/logodc.jpg, id=103, 215.6055pt x 83.5923pt>
+<imagenes/logodc.jpg, id=99, 215.6055pt x 83.5923pt>
 File: imagenes/logodc.jpg Graphic file (type jpg)
-
-<use imagenes/logodc.jpg>
+ <use imagenes/logodc.jpg>
 Package pdftex.def Info: imagenes/logodc.jpg used on input line 156.
 (pdftex.def)             Requested size: 215.60497pt x 83.59207pt.
 
@@ -877,7 +876,7 @@ LaTeX Font Info:    Try loading font information for U+lasy on input line 156.
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-<imagenes/logouba.jpg, id=104, 225.4824pt x 231.7458pt>
+<imagenes/logouba.jpg, id=100, 225.4824pt x 231.7458pt>
 File: imagenes/logouba.jpg Graphic file (type jpg)
 
 <use imagenes/logouba.jpg>
@@ -912,7 +911,7 @@ l.168 \newpage
 \openout2 = `Ejercicio1.aux'.
 
  (./Ejercicio1.tex
-<imagenes/Ex1Ej1.png, id=146, 1030.85126pt x 187.70125pt>
+<imagenes/Ex1Ej1.png, id=141, 1030.85126pt x 187.70125pt>
 File: imagenes/Ex1Ej1.png Graphic file (type png)
 
 <use imagenes/Ex1Ej1.png>
@@ -923,7 +922,7 @@ Overfull \hbox (42.46121pt too wide) in paragraph at lines 15--16
  [][] 
  []
 
-<imagenes/Ex2Ej1.png, id=147, 1030.85126pt x 157.58875pt>
+<imagenes/Ex2Ej1.png, id=142, 1030.85126pt x 157.58875pt>
 File: imagenes/Ex2Ej1.png Graphic file (type png)
 
 <use imagenes/Ex2Ej1.png>
@@ -934,20 +933,57 @@ Overfull \hbox (42.46121pt too wide) in paragraph at lines 24--25
  [][] 
  []
 
+<imagenes/Ex3Ej1.png, id=143, 1030.85126pt x 187.70125pt>
+File: imagenes/Ex3Ej1.png Graphic file (type png)
+
+<use imagenes/Ex3Ej1.png>
+Package pdftex.def Info: imagenes/Ex3Ej1.png used on input line 32.
+(pdftex.def)             Requested size: 467.04745pt x 85.04045pt.
+
+Overfull \hbox (42.46121pt too wide) in paragraph at lines 32--33
+ [][] 
+ []
+
 ) [2
 
- <./imagenes/Ex1Ej1.png (PNG copy)> <./imagenes/Ex2Ej1.png (PNG copy)>]
+ <./imagenes/Ex1Ej1.png (PNG copy)> <./imagenes/Ex2Ej1.png (PNG copy)> <./image
+nes/Ex3Ej1.png (PNG copy)>]
 \openout2 = `Ejercicio2.aux'.
 
+ (./Ejercicio2.tex
+<imagenes/Ej2Experimento1core.png, id=151, 1030.85126pt x 157.58875pt>
+File: imagenes/Ej2Experimento1core.png Graphic file (type png)
 
-(./Ejercicio2.tex) [3
+<use imagenes/Ej2Experimento1core.png>
+Package pdftex.def Info: imagenes/Ej2Experimento1core.png used on input line 17
+.
+(pdftex.def)             Requested size: 467.04745pt x 71.3976pt.
+
+Overfull \hbox (42.46121pt too wide) in paragraph at lines 17--18
+ [][] 
+ []
+
+<imagenes/Ej2Experimento2core.png, id=152, 1030.85126pt x 187.70125pt>
+File: imagenes/Ej2Experimento2core.png Graphic file (type png)
+
+<use imagenes/Ej2Experimento2core.png>
+Package pdftex.def Info: imagenes/Ej2Experimento2core.png used on input line 31
+.
+(pdftex.def)             Requested size: 467.04745pt x 85.04045pt.
+
+Overfull \hbox (42.46121pt too wide) in paragraph at lines 31--32
+ [][] 
+ []
+
+) [3
 
 
-]
+ <./imagenes/Ej2Experimento1core.png (PNG copy)> <./imagenes/Ej2Experimento2cor
+e.png (PNG copy)>]
 \openout2 = `Ejercicio3.aux'.
 
  (./Ejercicio3.tex
-<imagenes/BatchExperimento.png, id=158, 1030.85126pt x 157.58875pt>
+<imagenes/BatchExperimento.png, id=159, 1030.85126pt x 157.58875pt>
 File: imagenes/BatchExperimento.png Graphic file (type png)
 
 <use imagenes/BatchExperimento.png>
@@ -958,10 +994,23 @@ Overfull \hbox (42.46121pt too wide) in paragraph at lines 14--15
  [][] 
  []
 
+<imagenes/BatchExperimento2cores.png, id=160, 1030.85126pt x 187.70125pt>
+File: imagenes/BatchExperimento2cores.png Graphic file (type png)
+
+<use imagenes/BatchExperimento2cores.png>
+Package pdftex.def Info: imagenes/BatchExperimento2cores.png used on input line
+ 22.
+(pdftex.def)             Requested size: 467.04745pt x 85.04045pt.
+
+Overfull \hbox (42.46121pt too wide) in paragraph at lines 22--23
+ [][] 
+ []
+
 ) [4
 
 
- <./imagenes/BatchExperimento.png (PNG copy)>]
+ <./imagenes/BatchExperimento.png (PNG copy)> <./imagenes/BatchExperimento2core
+s.png (PNG copy)>]
 \openout2 = `Ejercicio4.aux'.
 
  (./Ejercicio4.tex) [5
@@ -970,14 +1019,14 @@ Overfull \hbox (42.46121pt too wide) in paragraph at lines 14--15
 ]
 \openout2 = `Ejercicio5.aux'.
 
-
-(./Ejercicio5.tex) [6
+ (./Ejercicio5.tex) [6
 
 
 ]
 \openout2 = `Ejercicio6.aux'.
 
- (./Ejercicio6.tex) [7
+
+(./Ejercicio6.tex) [7
 
 
 ]
@@ -989,9 +1038,8 @@ Overfull \hbox (42.46121pt too wide) in paragraph at lines 14--15
 ]
 \openout2 = `Ejercicio8.aux'.
 
-
-(./Ejercicio8.tex
-<imagenes/Ej8Experimento1.png, id=182, 1030.85126pt x 217.81375pt>
+ (./Ejercicio8.tex
+<imagenes/Ej8Experimento1.png, id=185, 1030.85126pt x 217.81375pt>
 File: imagenes/Ej8Experimento1.png Graphic file (type png)
 
 <use imagenes/Ej8Experimento1.png>
@@ -1002,7 +1050,7 @@ Overfull \hbox (42.46121pt too wide) in paragraph at lines 26--27
  [][] 
  []
 
-<imagenes/Ej8Experimento2.png, id=183, 1030.85126pt x 217.81375pt>
+<imagenes/Ej8Experimento2.png, id=186, 1030.85126pt x 217.81375pt>
 File: imagenes/Ej8Experimento2.png Graphic file (type png)
 
 <use imagenes/Ej8Experimento2.png>
@@ -1040,14 +1088,14 @@ LaTeX Info: Redefining \% on input line 19.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 189.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 189.
 Package rerunfilecheck Info: File `informe.out' has not changed.
-(rerunfilecheck)             Checksum: 7DA5F99192FACEF515E04CB6727FFF8B;1370.
+(rerunfilecheck)             Checksum: 5088771D19AD0F5314EAD44B2956D571;1310.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 189.
  ) 
 Here is how much of TeX's memory you used:
- 19947 strings out of 493304
- 338457 string characters out of 6139871
- 440309 words of memory out of 5000000
- 22907 multiletter control sequences out of 15000+600000
+ 19969 strings out of 493304
+ 339124 string characters out of 6139871
+ 441310 words of memory out of 5000000
+ 22922 multiletter control sequences out of 15000+600000
  8249 words of font info for 34 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  56i,14n,55p,425b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1059,10 +1107,10 @@ f-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/t
 ype1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1
 /public/amsfonts/cm/cmtt10.pfb>
-Output written on informe.pdf (12 pages, 518882 bytes).
+Output written on informe.pdf (12 pages, 553479 bytes).
 PDF statistics:
- 240 PDF objects out of 1000 (max. 8388607)
- 208 compressed objects within 3 object streams
- 43 named destinations out of 1000 (max. 500000)
- 240 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 243 PDF objects out of 1000 (max. 8388607)
+ 207 compressed objects within 3 object streams
+ 46 named destinations out of 1000 (max. 500000)
+ 252 words of extra memory for PDF output out of 10000 (max. 10000000)
 

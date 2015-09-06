@@ -22,13 +22,16 @@ tasks.o: tasks.cpp tasks.h basetask.h
 
 ejercicio1: 
 	./simusched Lotes/loteEj1.tsk 1 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej1.png 
+	./simusched Lotes/loteEj1.tsk 2 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej1.png
 ejericio2: 
-	./simusched Lotes/loteEj3Experimento1.tsk 2 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png 
+	./simusched Lotes/loteEj2.tsk 1 4 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png 
+	./simusched Lotes/loteEj2.tsk 2 4 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png 
 ejercicio3:
-	./simusched Lotes/loteEj3Experimento1.tsk 2 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png 
+	./simusched Lotes/loteEj3.tsk 1 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png
+	./simusched Lotes/loteEj3.tsk 2 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png 
 
 ejercicio4:
-	./simusched Lotes/loteEj3Experimento1.tsk 2 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png 
+	
 ejercicio5:
 	./simusched Lotes/loteEj5.tsk 1 2 1 SchedRR 2 | ./graphsched.py > Lotes/imagenes/Ej5_q2.png 
 	./simusched Lotes/loteEj5.tsk 1 2 1 SchedRR 10 | ./graphsched.py > Lotes/imagenes/Ej5_q10.png 
@@ -39,8 +42,8 @@ ejercicio7:
 	./simusched Lotes/loteEj7.tsk 1 1 1 SchedMistery 2 | ./graphsched.py > Lotes/imagenes/Ej7.png 
 	./simusched Lotes/loteEj7.tsk 1 1 1 SchedNoMistery 2 | ./graphsched.py > Lotes/imagenes/Ej7.png 
 ejercicio8:
-	./simusched Lotes/loteEj8Experimento1.tsk 2 1 1 SchedRR2 | ./graphsched.py > Lotes/imagenes/Ej8Experimento1.png
-	./simusched Lotes/loteEj8Experimento2.tsk 2 1 1 SchedRR2 | ./graphsched.py > Lotes/Ej8Experimento2.png
+	./simusched Lotes/loteEj8Experimento1.tsk 2 1 1 SchedRR2 5 5| ./graphsched.py > Lotes/imagenes/Ej8Experimento1.png
+	./simusched Lotes/loteEj8Experimento2.tsk 2 1 1 SchedRR2 5 5| ./graphsched.py > Lotes/Ej8Experimento2.png
 
 clean:
 	rm -f $(OBJS) $(MAIN)
