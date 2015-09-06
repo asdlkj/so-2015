@@ -24,62 +24,62 @@ SchedRR::~SchedRR() {
 
 
 void SchedRR::load(int pid) {
-	bool loEncontre = false;
 	int i = 0;
-	while(i < cant_cores && !loEncontre){
+	bool loEncontre = false;
+	while(i < pid_cores.size() && !loEncontre){
 		if(pid_cores[i] == IDLE_TASK){
-			loEncontre = true;
 			pid_cores[i] = pid;
 			quantum_restantes[i] = cpu_quantum;
+			loEncontre = true;
 		}
 		i++;
 	}
 	if(!loEncontre){
 		enEspera.push(pid);
 	}
-
 }
 
+
 void SchedRR::unblock(int pid) {
-	bool loEncontre = false;
 	int i = 0;
-	while(!loEncontre && i < pid_bloqueados.size()){
+	bool loEncontre = false;
+	while(i < pid_bloqueados.size() && !loEncontre){
 		if(pid_bloqueados[i] == pid){
-			bool algunoLibre = false;
-			int j = 0;
-			while(j < cant_cores && !algunoLibre){
-				if(pid_cores[j] == IDLE_TASK && pid_cores[j] == pid){
-					algunoLibre = true;
-					pid_cores[j] = pid;
-				}
-				j++;
-			}
-			if(!algunoLibre){
-				enEspera.push(pid);
-			}
 			pid_bloqueados.erase(pid_bloqueados.begin() + i);
+			enEspera.push(pid);
 			loEncontre = true;
-
 		}
-
 		i++;
 	}
+}
+
+bool SchedRR::estaBloqueado(int pid){
+	bool loEncontre = false;
+	int i = 0;
+	while(i < pid_bloqueados.size() && !loEncontre){
+		if(pid_bloqueados[i] == pid){
+			loEncontre = true;
+		}
+		i++;
+	}
+	return loEncontre;
 }
 
 int SchedRR::tick(int cpu, const enum Motivo m) {
 	if(m == TICK){
 		quantum_restantes[cpu]--;
-		if(quantum_restantes[cpu] == 0 && !enEspera.empty()){
+		if(quantum_restantes[cpu] <= 0){
 			enEspera.push(pid_cores[cpu]);
 			pid_cores[cpu] = enEspera.front();
 			enEspera.pop();
+			quantum_restantes[cpu] = cpu_quantum;
 		}
-		quantum_restantes[cpu] = cpu_quantum;
-		
 	}
 	else if(m == BLOCK){
-		pid_bloqueados.push_back(pid_cores[cpu]);
-		//pid_cores[cpu] = IDLE_TASK;
+		if(!estaBloqueado(pid_cores[cpu])){
+			pid_bloqueados.push_back(pid_cores[cpu]);	
+		}
+		
 		if(!enEspera.empty()){
 			pid_cores[cpu] = enEspera.front();
 			enEspera.pop();
