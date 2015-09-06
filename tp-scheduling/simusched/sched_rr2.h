@@ -19,10 +19,12 @@ class SchedRR2 : public SchedBase {
 
 		bool estaBloqueado(int pid, int cpu);
 		int dondeSeEncuentraBloqueado(int pid);
+		void SiEstaBloqueadoQuitar(int pid, int cpu);
+
 		struct core
 		{
 			int pidActual;
-			int quantum_restante_actual; 
+			int quantum_restantes; 
 			queue<int> enEspera;
 			vector<int> pid_bloqueados;
 		};

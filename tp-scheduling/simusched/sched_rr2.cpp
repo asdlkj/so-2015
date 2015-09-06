@@ -14,7 +14,7 @@ SchedRR2::SchedRR2(vector<int> argn) {
 	for(int i = 0; i < cant_cores; i++){
 		//nucleos[i].bloqueado = false;
 		nucleos[i].pidActual = IDLE_TASK;
-		nucleos[i].quantum_restante_actual = 0;
+		nucleos[i].quantum_restantes = 0;
 	}
 }
 
@@ -44,7 +44,7 @@ void SchedRR2::load(int pid) {
 
 	if(nucleos[indice_resultado].pidActual == IDLE_TASK){
 		nucleos[indice_resultado].pidActual = pid;
-		nucleos[indice_resultado].quantum_restante_actual = cpu_quantum;
+		nucleos[indice_resultado].quantum_restantes = cpu_quantum;
 	}
 	else{
 		nucleos[indice_resultado].enEspera.push(pid);
@@ -93,34 +93,58 @@ bool SchedRR2::estaBloqueado(int pid, int cpu){
 	return loEncontre;
 }
 
+void SchedRR2::SiEstaBloqueadoQuitar(int pid, int cpu){
+	bool loEncontre = false;
+	int i = 0;
+	while(i < nucleos[cpu].pid_bloqueados.size() && !loEncontre){
+		if(nucleos[cpu].pid_bloqueados[i] == pid){
+			loEncontre = true;
+			nucleos[cpu].pid_bloqueados.erase(nucleos[cpu].pid_bloqueados.begin() + i);
+		}
+		i++;
+	}
+}
+
 int SchedRR2::tick(int cpu, const enum Motivo m) {
 	if(m == TICK){
-		nucleos[cpu].quantum_restante_actual--;
-		if(nucleos[cpu].quantum_restante_actual <= 0){
-			nucleos[cpu].enEspera.push(nucleos[cpu].pidActual);
-			nucleos[cpu].pidActual = nucleos[cpu].enEspera.front();
-			nucleos[cpu].enEspera.pop();
-			nucleos[cpu].quantum_restante_actual = cpu_quantum;
+		nucleos[cpu].quantum_restantes--;
+		if(nucleos[cpu].quantum_restantes <= 0){
+			if(nucleos[cpu].pidActual != IDLE_TASK){
+				nucleos[cpu].enEspera.push(nucleos[cpu].pidActual);
+			}
+			if(!nucleos[cpu].enEspera.empty()){
+				nucleos[cpu].pidActual = nucleos[cpu].enEspera.front();
+				nucleos[cpu].enEspera.pop();
+				nucleos[cpu].quantum_restantes = cpu_quantum;	
+			}
+			
+			
 		}
 	}
 	else if(m == BLOCK){
-		if(!estaBloqueado(nucleos[cpu].pidActual, cpu)){
-			nucleos[cpu].pid_bloqueados.push_back(nucleos[cpu].pidActual);	
+		if(!estaBloqueado(nucleos[cpu].pidActual, cpu)){ //Si no esta bloqueada lo bloqueo
+			nucleos[cpu].pid_bloqueados.push_back(nucleos[cpu].pidActual);
+			nucleos[cpu].quantum_restantes = 0;	
 		}
 		
 		if(!nucleos[cpu].enEspera.empty()){
 			nucleos[cpu].pidActual = nucleos[cpu].enEspera.front();
 			nucleos[cpu].enEspera.pop();
-			nucleos[cpu].quantum_restante_actual = cpu_quantum;
+			nucleos[cpu].quantum_restantes = cpu_quantum;
 		}
 		
 	}
 	else if(m == EXIT){
+		SiEstaBloqueadoQuitar(nucleos[cpu].pidActual, cpu);
+
+		
 		nucleos[cpu].pidActual = IDLE_TASK;
+		nucleos[cpu].quantum_restantes = 0;	
+
 		if(!nucleos[cpu].enEspera.empty()){
 			nucleos[cpu].pidActual = nucleos[cpu].enEspera.front();
 			nucleos[cpu].enEspera.pop();
-			nucleos[cpu].quantum_restante_actual= cpu_quantum;
+			nucleos[cpu].quantum_restantes = cpu_quantum;
 		}
 
 	}

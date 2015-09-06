@@ -24,19 +24,19 @@ SchedRR::~SchedRR() {
 
 
 void SchedRR::load(int pid) {
-	// int i = 0;
-	// bool loEncontre = false;
-	// while(i < pid_cores.size() && !loEncontre){
-	// 	if(pid_cores[i] == IDLE_TASK){
-	// 		pid_cores[i] = pid;
-	// 		quantum_restantes[i] = cpu_quantum;
-	// 		loEncontre = true;
-	// 	}
-	// 	i++;
-	// }
-	// if(!loEncontre){
+	int i = 0;
+	bool loEncontre = false;
+	while(i < pid_cores.size() && !loEncontre){
+		if(pid_cores[i] == IDLE_TASK){
+			pid_cores[i] = pid;
+			quantum_restantes[i] = cpu_quantum;
+			loEncontre = true;
+		}
+		i++;
+	}
+	if(!loEncontre){
 		enEspera.push(pid);
-	//}
+	}
 }
 
 
