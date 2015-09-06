@@ -21,7 +21,7 @@ class SchedRR2 : public SchedBase {
 			int pidActual;
 			int quantum_restante_actual; 
 			queue<int> enEspera;
-			bool bloqueado;
+			vector<int> pid_bloqueados;
 		};
 
 		vector<core> nucleos;

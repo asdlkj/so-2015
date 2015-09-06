@@ -48,7 +48,7 @@ void SchedRR::unblock(int pid) {
 			bool algunoLibre = false;
 			int j = 0;
 			while(j < cant_cores && !algunoLibre){
-				if(pid_cores[j] == IDLE_TASK){
+				if(pid_cores[j] == IDLE_TASK && pid_cores[j] == pid){
 					algunoLibre = true;
 					pid_cores[j] = pid;
 				}
@@ -79,7 +79,7 @@ int SchedRR::tick(int cpu, const enum Motivo m) {
 	}
 	else if(m == BLOCK){
 		pid_bloqueados.push_back(pid_cores[cpu]);
-		pid_cores[cpu] = IDLE_TASK;
+		//pid_cores[cpu] = IDLE_TASK;
 		if(!enEspera.empty()){
 			pid_cores[cpu] = enEspera.front();
 			enEspera.pop();
