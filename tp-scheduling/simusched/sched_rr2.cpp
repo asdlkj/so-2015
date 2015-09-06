@@ -42,13 +42,8 @@ void SchedRR2::load(int pid) {
 	}
 
 
-	if(!estaBloqueado(nucleos[indice_resultado].pidActual, indice_resultado)){
-		nucleos[indice_resultado].enEspera.push(pid);
-	}
-	else{
-		nucleos[indice_resultado].quantum_restantes = cpu_quantum;	
-		nucleos[indice_resultado].pidActual = pid;
-	}
+	nucleos[indice_resultado].enEspera.push(pid);
+
 	
 	
 	
