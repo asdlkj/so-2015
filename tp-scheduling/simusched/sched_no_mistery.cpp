@@ -10,6 +10,11 @@ typedef std::tuple<int, bool, int, int>  tarea;	//pid, blokeado, tiempo que corr
 
 #define BUSY 0
 #define FREE 1
+#define _PID get<0>(*it)
+#define _bloqueo get<1>(*it)
+#define _indiceTiempos get<2>(*it)
+#define _tiempoRestante get<3>(*it)
+
 
 SchedNoMistery::SchedNoMistery(vector<int> argn) {
 	primero = true;
@@ -37,8 +42,8 @@ void SchedNoMistery::unblock(int pid) {
 	int cont = tasks.size();
 	while (cont >= 0) //recorre todos y vuelve al punto de partida. al final it está en la misma posición de la que salió.
 	{
-		if (pid == get<0>(*it))
-			get<1>(*it) = FREE;
+		if (pid == _PID)
+			_bloqueo = FREE;
 		
 		++it;
 		if (it == tasks.end())
@@ -56,7 +61,7 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 		if (tasks.empty())
 			cerr << "m == BLOCK cuando task.empty() == true" << endl;
 			
-		get<1>(*it) = BUSY;
+		_bloqueo = BUSY;
 		
 		++it;
 		if (it == tasks.end())
@@ -77,7 +82,7 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 		return IDLE_TASK;
 
 	int cont = tasks.size();
-	while (get<1>(*it) == BUSY && cont > 0)
+	while (_bloqueo == BUSY && cont > 0)
 	{
 		++it;
 		if (it == tasks.end())
@@ -89,14 +94,14 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 		pid = IDLE_TASK;
 	else
 	{
-		pid = get<0>(*it);
+		pid = _PID;
 		//si le quedan tics para correr, le resto uno (el que acaba de ocurrir). sino, averiguo cuantos tendrá en la nueva llamada al proceso.
-		if (get<3>(*it) > 1)
-			get<3>(*it) = get<3>(*it) -1;
+		if (_tiempoRestante > 1)
+			_tiempoRestante = _tiempoRestante -1;
 		else
 		{
-			get<2>(*it) = max(get<2>(*it)+1 , (int)tiempos.size()-1);
-			get<3>(*it) = tiempos[get<2>(*it)];
+			_indiceTiempos = max(_indiceTiempos +1 , (int)tiempos.size()-1);
+			_tiempoRestante = tiempos[_indiceTiempos];
 		}
 		
 	}
