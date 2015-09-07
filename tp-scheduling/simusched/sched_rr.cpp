@@ -24,24 +24,25 @@ SchedRR::~SchedRR() {
 
 
 void SchedRR::load(int pid) {
-	enEspera.push(pid);
+	enEspera.push(pid);  	//Lo pongo en la cola
 }
 
 
 void SchedRR::unblock(int pid) {
 	int i = 0;
 	bool loEncontre = false;
+	//Busco entre todos los pid bloqueados la posicion del pid que quiero desbloquear y lo quito.
 	while(i < pid_bloqueados.size() && !loEncontre){
 		if(pid_bloqueados[i] == pid){
 			pid_bloqueados.erase(pid_bloqueados.begin() + i);
-			enEspera.push(pid);
+			enEspera.push(pid); 			//lo pongo de nuevo en la cola
 			loEncontre = true;
 		}
 		i++;
 	}
 }
 
-bool SchedRR::estaBloqueado(int pid){
+bool SchedRR::estaBloqueado(int pid){ //Devuelve true si el proceso esta bloqueado
 	bool loEncontre = false;
 	int i = 0;
 	while(i < pid_bloqueados.size() && !loEncontre){
@@ -53,7 +54,7 @@ bool SchedRR::estaBloqueado(int pid){
 	return loEncontre;
 }
 
-void SchedRR::SiEstaBloqueadoQuitar(int pid){
+void SchedRR::SiEstaBloqueadoQuitar(int pid){ //Busca el pid en el cpu y, si lo encuentra, lo quita
 	bool loEncontre = false;
 	int i = 0;
 	while(i < pid_bloqueados.size() && !loEncontre){
@@ -67,12 +68,12 @@ void SchedRR::SiEstaBloqueadoQuitar(int pid){
 
 int SchedRR::tick(int cpu, const enum Motivo m) {
 	if(m == TICK){
-		quantum_restantes[cpu]--;
-		if(quantum_restantes[cpu] <= 0){
-			if(pid_cores[cpu] != IDLE_TASK){
+		quantum_restantes[cpu]--; 
+		if(quantum_restantes[cpu] <= 0){  //Si se termino su tiempo:
+			if(pid_cores[cpu] != IDLE_TASK){ //Si no es IDLE entonces lo guardo en la cola.
 				enEspera.push(pid_cores[cpu]);
 			}
-			if(!enEspera.empty()){
+			if(!enEspera.empty()){  //Si hay un proceso en la cola, lo cargo para ejecucion.
 				pid_cores[cpu] = enEspera.front();
 				enEspera.pop();
 				quantum_restantes[cpu] = cpu_quantum;	
@@ -82,12 +83,12 @@ int SchedRR::tick(int cpu, const enum Motivo m) {
 		}
 	}
 	else if(m == BLOCK){
-		if(!estaBloqueado(pid_cores[cpu])){ //Si no esta bloqueada lo bloqueo
+		if(!estaBloqueado(pid_cores[cpu])){ //Si no esta bloqueada, lo bloqueo
 			pid_bloqueados.push_back(pid_cores[cpu]);
 			quantum_restantes[cpu] = 0;	
 		}
 		
-		if(!enEspera.empty()){
+		if(!enEspera.empty()){ //Si hay un proceso en la cola, lo cargo para ejecucion.
 			pid_cores[cpu] = enEspera.front();
 			enEspera.pop();
 			quantum_restantes[cpu] = cpu_quantum;
@@ -95,13 +96,13 @@ int SchedRR::tick(int cpu, const enum Motivo m) {
 		
 	}
 	else if(m == EXIT){
-		SiEstaBloqueadoQuitar(pid_cores[cpu]);
+		SiEstaBloqueadoQuitar(pid_cores[cpu]);  //Suponiendo que se puede terminar sin desbloquear, entonces lo quito
 
 		
-		pid_cores[cpu] = IDLE_TASK;
-		quantum_restantes[cpu] = 0;	
+		pid_cores[cpu] = IDLE_TASK; //Cargo la tarea IDLE
+		quantum_restantes[cpu] = 0;	 //Dejo el quantum en 0 por si en el proximo tick puedo cambiar a otro proceso.
 
-		if(!enEspera.empty()){
+		if(!enEspera.empty()){ //Si hay un proceso en la cola, lo cargo para ejecucion.
 			pid_cores[cpu] = enEspera.front();
 			enEspera.pop();
 			quantum_restantes[cpu] = cpu_quantum;
