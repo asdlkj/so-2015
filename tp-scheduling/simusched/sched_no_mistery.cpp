@@ -38,6 +38,9 @@ void SchedNoMistery::unblock(int pid) {
 		}
 		
 		++it;
+		if (it == tasks.end())
+			it = tasks.begin();
+			
 		cont--;
 	}
 }
@@ -47,7 +50,10 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 	if (m == BLOCK)
 	{
 		it->second = BUSY;
+		
 		++it;
+		if (it == tasks.end())
+			it = tasks.begin();
 	}
 	else
 	{
@@ -69,6 +75,9 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 	while (it->second == BUSY && cont > 0)
 	{
 		++it;
+		if (it == tasks.end())
+			it = tasks.begin();
+			
 		cont--;
 	}
 	if (it->second == BUSY) //recorrio todas las tareas y están todas ocupadas
