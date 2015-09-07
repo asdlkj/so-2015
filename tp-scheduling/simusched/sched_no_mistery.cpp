@@ -90,7 +90,7 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 			
 		cont--;
 	}
-	if (get<1>(*it) == BUSY) //recorrió todas las tareas y están todas ocupadas
+	if (_bloqueo == BUSY) //recorrió todas las tareas y están todas ocupadas
 		pid = IDLE_TASK;
 	else
 	{
@@ -103,9 +103,6 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 			_indiceTiempos = max(_indiceTiempos +1 , (int)tiempos.size()-1);
 			_tiempoRestante = tiempos[_indiceTiempos];
 		}
-		
 	}
-	
-
 	return pid;
 }

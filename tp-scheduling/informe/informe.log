@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.20)  6 SEP 2015 20:58
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2014.8.20)  6 SEP 2015 23:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -344,14 +344,17 @@ File: listings.cfg 2013/08/26 1.5b listings configuration
 ))
 Package: listings 2013/08/26 1.5b (Carsten Heinz)
 
-(./caratulaV.sty
+(/usr/share/texlive/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
+\@enLab=\toks37
+) (./caratulaV.sty
 
 LaTeX Warning: You have requested package `caratulaV',
                but the package provides `caratula'.
 
 Package: caratula 2005/08/09 v0.3 Para componer caratulas de TPs del DC
 Cargando package 'caratula' v0.3 (2005/08/09)
-\intlist=\toks37
+\intlist=\toks38
 ) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
 
@@ -421,7 +424,7 @@ Package: alltt 1997/06/16 v2.0g defines alltt environment
 (/usr/share/texmf/tex/latex/pgf/basiclayer/pgf.sty
 (/usr/share/texmf/tex/latex/pgf/utilities/pgfrcs.sty
 (/usr/share/texmf/tex/generic/pgf/utilities/pgfutil-common.tex
-\pgfutil@everybye=\toks38
+\pgfutil@everybye=\toks39
 )
 (/usr/share/texmf/tex/generic/pgf/utilities/pgfutil-latex.def
 \pgfutil@abb=\box32
@@ -440,11 +443,11 @@ Package: pgf 2008/01/15 v2.10 (rcs-revision 1.12)
 Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
 
 (/usr/share/texmf/tex/generic/pgf/utilities/pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks39
-\pgfkeys@temptoks=\toks40
+\pgfkeys@pathtoks=\toks40
+\pgfkeys@temptoks=\toks41
 
 (/usr/share/texmf/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
-\pgfkeys@tmptoks=\toks41
+\pgfkeys@tmptoks=\toks42
 ))
 \pgf@x=\dimen139
 \pgf@y=\dimen140
@@ -507,9 +510,9 @@ Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
 \pgfmath@dimen=\dimen147
 \pgfmath@count=\count143
 \pgfmath@box=\box33
-\pgfmath@toks=\toks42
-\pgfmath@stack@operand=\toks43
-\pgfmath@stack@operation=\toks44
+\pgfmath@toks=\toks43
+\pgfmath@stack@operand=\toks44
+\pgfmath@stack@operation=\toks45
 )
 (/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.code.tex
 (/usr/share/texmf/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex)
@@ -621,8 +624,8 @@ Package: pgfcomp-version-1-18 2007/07/23 v2.10 (rcs-revision 1.1)
 Package: pgffor 2010/03/23 v2.10 (rcs-revision 1.18)
 \pgffor@iter=\dimen173
 \pgffor@skip=\dimen174
-\pgffor@stack=\toks45
-\pgffor@toks=\toks46
+\pgffor@stack=\toks46
+\pgffor@toks=\toks47
 ))
 (/usr/share/texmf/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
 Package: tikz 2010/10/13 v2.10 (rcs-revision 1.76)
@@ -677,8 +680,8 @@ Package: moreverb 2008/06/03 v2.3a `more' verbatim facilities
 
 (/usr/share/texlive/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks47
-\verbatim@line=\toks48
+\every@verbatim=\toks48
+\verbatim@line=\toks49
 \verbatim@in@stream=\read2
 )
 \tab@position=\count157
@@ -686,9 +689,9 @@ Package: verbatim 2003/08/22 v1.5q LaTeX2e package for verbatim enhancements
 \listing@line=\count159
 )
 \verbatim@out=\write4
-runsystem(touch w18-test-2015961258.tex)...disabled (restricted).
+runsystem(touch w18-test-2015961433.tex)...disabled (restricted).
 
-runsystem(rm -f w18-test-2015961258.tex)...disabled (restricted).
+runsystem(rm -f w18-test-2015961433.tex)...disabled (restricted).
 
 
 
@@ -738,20 +741,20 @@ LaTeX Info: Redefining \% on input line 19.
 (./Ejercicio7.aux) (./Ejercicio8.aux))
 \openout1 = `informe.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 143.
-LaTeX Font Info:    ... okay on input line 143.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 143.
-LaTeX Font Info:    ... okay on input line 143.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 143.
-LaTeX Font Info:    ... okay on input line 143.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 143.
-LaTeX Font Info:    ... okay on input line 143.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 143.
-LaTeX Font Info:    ... okay on input line 143.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 143.
-LaTeX Font Info:    ... okay on input line 143.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 143.
-LaTeX Font Info:    ... okay on input line 143.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 144.
+LaTeX Font Info:    ... okay on input line 144.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -787,13 +790,13 @@ LaTeX Font Info:    ... okay on input line 143.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \. on input line 143.
-LaTeX Info: Redefining \% on input line 143.
+LaTeX Info: Redefining \. on input line 144.
+LaTeX Info: Redefining \% on input line 144.
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/ucsencs.def
 File: ucsencs.def 2011/01/21 Fixes to fontencodings LGR, T3
 )
 \AtBeginShipoutBox=\box46
-Package hyperref Info: Link coloring ON on input line 143.
+Package hyperref Info: Link coloring ON on input line 144.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -803,9 +806,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count161
 )
-LaTeX Info: Redefining \ref on input line 143.
-LaTeX Info: Redefining \pageref on input line 143.
-LaTeX Info: Redefining \nameref on input line 143.
+LaTeX Info: Redefining \ref on input line 144.
+LaTeX Info: Redefining \pageref on input line 144.
+LaTeX Info: Redefining \nameref on input line 144.
 
 (./informe.out) (./informe.out)
 \@outlinefile=\write5
@@ -820,12 +823,12 @@ LaTeX Info: Redefining \nameref on input line 143.
 \scratchbox=\box47
 \nofMPsegments=\count164
 \nofMParguments=\count165
-\everyMPshowfont=\toks49
+\everyMPshowfont=\toks50
 \MPscratchCnt=\count166
 \MPscratchDim=\dimen190
 \MPnumerator=\count167
 \makeMPintoPDFobject=\count168
-\everyMPtoPDFconversion=\toks50
+\everyMPtoPDFconversion=\toks51
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -847,7 +850,7 @@ Package lastpage Info: Please have a look at the pageslts package at
 (lastpage)             or
 (lastpage)             http://www.ctan.org/tex-archive/ 
 (lastpage)             install/macros/latex/contrib/pageslts.tds.zip
-(lastpage)             ! on input line 143.
+(lastpage)             ! on input line 144.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
@@ -855,23 +858,23 @@ ABD: EveryShipout initializing macros
 <imagenes/logodc.jpg, id=99, 215.6055pt x 83.5923pt>
 File: imagenes/logodc.jpg Graphic file (type jpg)
  <use imagenes/logodc.jpg>
-Package pdftex.def Info: imagenes/logodc.jpg used on input line 157.
+Package pdftex.def Info: imagenes/logodc.jpg used on input line 158.
 (pdftex.def)             Requested size: 215.60497pt x 83.59207pt.
 
 (/usr/share/texlive/texmf-dist/tex/latex/ucs/data/uni-0.def
 File: uni-0.def 2013/05/13 UCS: Unicode data U+0000..U+00FF
 )
-LaTeX Font Info:    Try loading font information for U+msa on input line 157.
+LaTeX Font Info:    Try loading font information for U+msa on input line 158.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 157.
+LaTeX Font Info:    Try loading font information for U+msb on input line 158.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 157.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 158.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
@@ -880,15 +883,15 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 File: imagenes/logouba.jpg Graphic file (type jpg)
 
 <use imagenes/logouba.jpg>
-Package pdftex.def Info: imagenes/logouba.jpg used on input line 157.
+Package pdftex.def Info: imagenes/logouba.jpg used on input line 158.
 (pdftex.def)             Requested size: 225.48184pt x 231.74522pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 157--157
+Underfull \hbox (badness 10000) in paragraph at lines 158--158
 
  []
 
 
-Overfull \hbox (21.2306pt too wide) in paragraph at lines 157--157
+Overfull \hbox (21.2306pt too wide) in paragraph at lines 158--158
 [][][] 
  []
 
@@ -906,7 +909,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.169 \newpage
+l.170 \newpage
                [1]
 \openout2 = `Ejercicio1.aux'.
 
@@ -1020,48 +1023,48 @@ s.png (PNG copy)>]
 \openout2 = `Ejercicio5.aux'.
 
  (./Ejercicio5.tex
-<imagenes/Ej5_q2.png, id=172, 1030.85126pt x 217.81375pt>
+<imagenes/Ej5_q2.png, id=176, 1030.85126pt x 217.81375pt>
 File: imagenes/Ej5_q2.png Graphic file (type png)
 
 <use imagenes/Ej5_q2.png>
-Package pdftex.def Info: imagenes/Ej5_q2.png used on input line 17.
+Package pdftex.def Info: imagenes/Ej5_q2.png used on input line 28.
 (pdftex.def)             Requested size: 467.04745pt x 98.6833pt.
 
-Overfull \hbox (42.46121pt too wide) in paragraph at lines 17--18
- [][] 
- []
-
-<imagenes/Ej5_q10.png, id=173, 1030.85126pt x 217.81375pt>
-File: imagenes/Ej5_q10.png Graphic file (type png)
-
-<use imagenes/Ej5_q10.png>
-Package pdftex.def Info: imagenes/Ej5_q10.png used on input line 22.
-(pdftex.def)             Requested size: 467.04745pt x 98.6833pt.
-
-Overfull \hbox (42.46121pt too wide) in paragraph at lines 22--23
- [][] 
- []
-
-<imagenes/Ej5_q50.png, id=174, 1030.85126pt x 217.81375pt>
-File: imagenes/Ej5_q50.png Graphic file (type png)
-
-<use imagenes/Ej5_q50.png>
-Package pdftex.def Info: imagenes/Ej5_q50.png used on input line 27.
-(pdftex.def)             Requested size: 467.04745pt x 98.6833pt.
-
-Overfull \hbox (42.46121pt too wide) in paragraph at lines 27--28
+Overfull \hbox (42.46121pt too wide) in paragraph at lines 28--29
  [][] 
  []
 
 [6
 
 
- <./imagenes/Ej5_q2.png (PNG copy)> <./imagenes/Ej5_q10.png (PNG copy)> <./imag
-enes/Ej5_q50.png (PNG copy)>]) [7]
+] <imagenes/Ej5_q10.png, id=186, 1030.85126pt x 217.81375pt>
+File: imagenes/Ej5_q10.png Graphic file (type png)
+
+<use imagenes/Ej5_q10.png>
+Package pdftex.def Info: imagenes/Ej5_q10.png used on input line 34.
+(pdftex.def)             Requested size: 467.04745pt x 98.6833pt.
+
+Overfull \hbox (42.46121pt too wide) in paragraph at lines 34--35
+ [][] 
+ []
+
+<imagenes/Ej5_q50.png, id=187, 1030.85126pt x 217.81375pt>
+File: imagenes/Ej5_q50.png Graphic file (type png)
+
+<use imagenes/Ej5_q50.png>
+Package pdftex.def Info: imagenes/Ej5_q50.png used on input line 39.
+(pdftex.def)             Requested size: 467.04745pt x 98.6833pt.
+
+Overfull \hbox (42.46121pt too wide) in paragraph at lines 39--40
+ [][] 
+ []
+
+[7 <./imagenes/Ej5_q2.png (PNG copy)> <./imagenes/Ej5_q10.png (PNG copy)> <./im
+agenes/Ej5_q50.png (PNG copy)>]) [8]
 \openout2 = `Ejercicio6.aux'.
 
  (./Ejercicio6.tex
-<imagenes/Ej6.png, id=190, 1030.85126pt x 217.81375pt>
+<imagenes/Ej6.png, id=203, 1030.85126pt x 217.81375pt>
 File: imagenes/Ej6.png Graphic file (type png)
  <use imagenes/Ej6.png>
 Package pdftex.def Info: imagenes/Ej6.png used on input line 13.
@@ -1071,30 +1074,69 @@ Overfull \hbox (42.46121pt too wide) in paragraph at lines 13--14
  [][] 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 17--18
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 19--30
-
- []
-
-) [8
+) [9
 
 
  <./imagenes/Ej6.png (PNG copy)>]
 \openout2 = `Ejercicio7.aux'.
 
- (./Ejercicio7.tex) [9
+ (./Ejercicio7.tex
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
+
+ []
 
 
-]
+Underfull \hbox (badness 10000) in paragraph at lines 29--34
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 36--46
+
+ []
+
+<imagenes/test1ej7.png, id=211, 1030.85126pt x 187.70125pt>
+File: imagenes/test1ej7.png Graphic file (type png)
+
+<use imagenes/test1ej7.png>
+Package pdftex.def Info: imagenes/test1ej7.png used on input line 53.
+(pdftex.def)             Requested size: 467.04745pt x 85.04045pt.
+
+Overfull \hbox (42.46121pt too wide) in paragraph at lines 53--54
+ [][] 
+ []
+
+[10
+
+
+] <imagenes/test2ej7.png, id=224, 1030.85126pt x 217.81375pt>
+File: imagenes/test2ej7.png Graphic file (type png)
+
+<use imagenes/test2ej7.png>
+Package pdftex.def Info: imagenes/test2ej7.png used on input line 63.
+(pdftex.def)             Requested size: 467.04745pt x 98.6833pt.
+
+Overfull \hbox (42.46121pt too wide) in paragraph at lines 63--64
+ [][] 
+ []
+
+<imagenes/test3ej7.png, id=225, 1030.85126pt x 217.81375pt>
+File: imagenes/test3ej7.png Graphic file (type png)
+
+<use imagenes/test3ej7.png>
+Package pdftex.def Info: imagenes/test3ej7.png used on input line 71.
+(pdftex.def)             Requested size: 467.04745pt x 98.6833pt.
+
+Overfull \hbox (42.46121pt too wide) in paragraph at lines 71--72
+ [][] 
+ []
+
+) [11 <./imagenes/test1ej7.png (PNG copy)> <./imagenes/test2ej7.png (PNG copy)>
+ <./imagenes/test3ej7.png (PNG copy)>]
 \openout2 = `Ejercicio8.aux'.
 
  (./Ejercicio8.tex
-<imagenes/Ej8Experimento1.png, id=200, 1030.85126pt x 217.81375pt>
+<imagenes/Ej8Experimento1.png, id=233, 1030.85126pt x 217.81375pt>
 File: imagenes/Ej8Experimento1.png Graphic file (type png)
 
 <use imagenes/Ej8Experimento1.png>
@@ -1105,7 +1147,7 @@ Overfull \hbox (42.46121pt too wide) in paragraph at lines 26--27
  [][] 
  []
 
-<imagenes/Ej8Experimento2.png, id=201, 1030.85126pt x 217.81375pt>
+<imagenes/Ej8Experimento2.png, id=234, 1030.85126pt x 217.81375pt>
 File: imagenes/Ej8Experimento2.png Graphic file (type png)
 
 <use imagenes/Ej8Experimento2.png>
@@ -1116,60 +1158,57 @@ Overfull \hbox (42.46121pt too wide) in paragraph at lines 35--36
  [][] 
  []
 
-[10
+[12
 
 
- <./imagenes/Ej8Experimento1.png (PNG copy)>]) [11 <./imagenes/Ej8Experimento2.
+ <./imagenes/Ej8Experimento1.png (PNG copy)>]) [13 <./imagenes/Ej8Experimento2.
 png (PNG copy)>]
 
-LaTeX Warning: Empty `thebibliography' environment on input line 185.
+LaTeX Warning: Empty `thebibliography' environment on input line 186.
 
-[12
+[14
 
 ]
 
-Package hyperref Warning: Suppressing empty link on input line 188.
+Package hyperref Warning: Suppressing empty link on input line 189.
 
 
 AED: lastpage setting LastPage
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 190.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 190.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 191.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 191.
 (./informe.aux
 LaTeX Info: Redefining \. on input line 19.
 LaTeX Info: Redefining \% on input line 19.
  (./Ejercicio1.aux) (./Ejercicio2.aux) (./Ejercicio3.aux)
 (./Ejercicio4.aux) (./Ejercicio5.aux) (./Ejercicio6.aux) (./Ejercicio7.aux)
 (./Ejercicio8.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 190.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 190.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 191.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 191.
 Package rerunfilecheck Info: File `informe.out' has not changed.
 (rerunfilecheck)             Checksum: 5088771D19AD0F5314EAD44B2956D571;1310.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 190.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 191.
  ) 
 Here is how much of TeX's memory you used:
- 19997 strings out of 493304
- 339648 string characters out of 6139871
- 444315 words of memory out of 5000000
- 22938 multiletter control sequences out of 15000+600000
+ 20057 strings out of 493304
+ 340563 string characters out of 6139871
+ 447425 words of memory out of 5000000
+ 22980 multiletter control sequences out of 15000+600000
  8249 words of font info for 34 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 56i,14n,55p,425b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,15n,55p,585b,532s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1
-/public/amsfonts/cm/cmtt10.pfb>
-Output written on informe.pdf (13 pages, 601848 bytes).
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/t
+ype1/public/amsfonts/cm/cmss10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmssbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmtt10.pfb>
+Output written on informe.pdf (15 pages, 649069 bytes).
 PDF statistics:
- 260 PDF objects out of 1000 (max. 8388607)
- 219 compressed objects within 3 object streams
- 54 named destinations out of 1000 (max. 500000)
- 272 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 299 PDF objects out of 1000 (max. 8388607)
+ 252 compressed objects within 3 object streams
+ 67 named destinations out of 1000 (max. 500000)
+ 287 words of extra memory for PDF output out of 10000 (max. 10000000)
 
