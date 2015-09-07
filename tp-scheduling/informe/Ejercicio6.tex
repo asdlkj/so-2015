@@ -7,16 +7,18 @@ y compararlo con el ejercicio anterior con un solo procesador.
 
 
 \subsection{Experimentación}
-Se graficó lo pedido y se exhibe a continuación
+El gráfico de Gantt para el lote de tareas loteEj5.tsk se exhibe en la figura \ref{fig:ej6FCFS}. \par
 \begin{figure}[H]
   \centering
     \includegraphics[width=1.1\textwidth]{imagenes/Ej6.png}
   \caption{loteEj5.tsk con FCFS}
+  \label{fig:ej6FCFS}
 \end{figure}
+Podemos ver que el gráfico se asemeja mucho a la corrida del lote en \verb|SchedRR| con quantum 50. Volcamos los datos de tiempo en la tabla \ref{tab:ej6FCFS} de tiempos para cada tarea\par
 
-Del gráfico obtuvimos la siguiente tabla de tiempos para cada tarea\\
-
-\begin{tabular}{ l | c | c | c | c | c | c | }
+\begin{table}
+\centering
+\begin{tabular}{ | c | c | c | c | c | c | c | }
   \hline			
   pid & ciclos & inicio & fin & latencia & waiting time & tiempo total  \\
   \hline
@@ -25,7 +27,12 @@ Del gráfico obtuvimos la siguiente tabla de tiempos para cada tarea\\
 2 & 51 & 0 & 159 & 108 & 108 & 159\\
 3 & 21 & 0 & 182 & 161 & 161 & 182\\
 4 & 21 & 0 & 205 & 184 & 184 & 205\\
+  \hline
+promedio & - & - & - & 102 & CPU: 55  & CPU: 106 \\
+                & &  &  &  & E/S: 172.5  & E/S: 193\\
 \hline
-\end{tabular}\\
+\end{tabular}
+\caption{Tiempos para loteEj5.tsk con FCFS}\label{tab:ej6FCFS}
+\end{table}
 
-Vemos que el gráfico y tiempos se parecen bastante a lo realizado para el SchedRR con quantum de 50 debido a que cuant más grande es el quantum, más tiempo permanece corriendo las tareas.
+FCFS y RR con quantum 50 tienen latencia promedio similares, y waiting times y tiempos totales similares también para los preceso de E/S, pues en ambos casos, corren últimos y luego de que hayan corrido los proceso más largo de CPU. En cambio para las tareas intensas de CPU, éstos dos últimos valores son mejores en FCFS, justamente porque éstos procesos corren primeros y completos antes de cambiar a las tareas de E/S.\par
