@@ -6,11 +6,12 @@
 #include <iostream>
 #include <list>
 #include <utility>
+#include <tuple>        // std::tuple, std::get
 #include "basesched.h"
 
 using namespace std;
 
-typedef std::pair<int, pair<bool, int> >  tarea;	//pid, blokeado/tiempo de ejecucion restante (índice en el vector entrada)
+typedef std::tuple<int, bool, int, int>  tarea;	//pid, blokeado, tiempo que corre(total, indice del vector tiempos), tiempo restante del total
 
 class SchedNoMistery : public SchedBase {
 	public:
@@ -24,7 +25,6 @@ class SchedNoMistery : public SchedBase {
 		list<tarea>::iterator it;
 		vector<int> tiempos;
 		bool primero;
-		int tiempo;
 };
 
 #endif
