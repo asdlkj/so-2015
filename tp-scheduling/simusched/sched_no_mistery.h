@@ -10,7 +10,7 @@
 
 using namespace std;
 
-typedef std::pair<int, bool>  tarea;
+typedef std::pair<int, pair<bool, int> >  tarea;	//pid, blokeado/tiempo de ejecucion restante (índice en el vector entrada)
 
 class SchedNoMistery : public SchedBase {
 	public:
@@ -22,7 +22,9 @@ class SchedNoMistery : public SchedBase {
 	private:
 		list<tarea> tasks; //tendrá la información de la tarea y si está blokeada o no
 		list<tarea>::iterator it;
+		vector<int> tiempos;
 		bool primero;
+		int tiempo;
 };
 
 #endif
