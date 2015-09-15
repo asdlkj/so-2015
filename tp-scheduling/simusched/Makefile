@@ -25,13 +25,15 @@ ejercicio1:
 	./simusched Lotes/loteEj1.tsk 2 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej1.png
 ejericio2: 
 	./simusched Lotes/loteEj2.tsk 1 4 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png 
-	./simusched Lotes/loteEj2.tsk 2 4 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png 
+	./simusched Lotes/loteEj2.tsk 2 4 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento2.png 
 ejercicio3:
 	./simusched Lotes/loteEj3.tsk 1 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png
 	./simusched Lotes/loteEj3.tsk 2 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png 
 
 ejercicio4:
-	
+	./simusched Lotes/lote_simple.tsk 1 1 1 SchedRR 10 | ./graphsched.py > Lotes/imagenes/Ej4Experimento1.png 
+	./simusched Lotes/lote_simple.tsk 2 1 1 SchedRR 10 10 | ./graphsched.py > Lotes/imagenes/Ej4Experimento2.png
+	./simusched Lotes/lote_simple.tsk 2 1 1 SchedRR 10 50 | ./graphsched.py > Lotes/imagenes/Ej4Experimento3.png
 ejercicio5:
 	./simusched Lotes/loteEj5.tsk 1 2 1 SchedRR 2 | ./graphsched.py > Lotes/imagenes/Ej5_q2.png 
 	./simusched Lotes/loteEj5.tsk 1 2 1 SchedRR 10 | ./graphsched.py > Lotes/imagenes/Ej5_q10.png 

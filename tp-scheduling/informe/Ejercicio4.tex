@@ -2,12 +2,12 @@
 
 \subsection{Desarrollo}
 El ejercicio consiste en programar un scheduler de Round-Robin, para esto utilizaremos las siguientes estructuras: vector de enteros pid$\_$cores, vector de enteros pid$\_$bloqueados, 
-vector de enteros quantum$\_$restantes, entero cant$\_$cores, entero cpu$\_$quantum, Una cola de enteros enEspera.
+vector de enteros quantum$\_$restantes, entero cant$\_$cores, un vector de entero cpu$\_$quantum, Una cola de enteros enEspera.
 
-Cuando creamos el scheduler se nos dan la cantidad de cores(que será cant$\_$cores) y el quantum de los cpus(cpu$\_$quantum). Según el enunciado los procesos están agrupados 
+Cuando creamos el scheduler se nos dan la cantidad de cores(que será cant$\_$cores) y el quantum de cada uno de los cpus(cpu$\_$quantum). Según el enunciado los procesos están agrupados 
 en una única cola, de ahí viene enEspera. Como conocemos la cantidad de cores usamos tres estructuras de vectores para, solo teniendo el número del cpu, poder acceder a la 
 información de las mismas. pid$\_$bloqueados nos indica si el proceso en cuestión está o no bloqueado(Estos pids no están en enEspera ya que esta corresponde a los
-ready), pid$\_$cores nos da el pid del proceso que esta corriendo en el cpu y quantum$\_$restantes nos dice cuanto tiempo le queda por ejecutar hasta terminar su tiempo en el 
+ready), pid$\_$cores nos da el pid del proceso que está corriendo en el cpu y quantum$\_$restantes nos dice cuanto tiempo le queda por ejecutar hasta terminar su tiempo en el 
 procesador.
 
 En el programa load en el cual tenemos que poner un proceso en el scheduler lo que haremos será ponerlo en enEspera. En el caso de unblock lo que hacemos es eliminar el pid de 
@@ -15,7 +15,7 @@ pid$\_$bloqueados, sabemos que está ahí porque lo añadimos en tick. Por últi
  
 TICK: en el mismo sabemos que ha pasado un tick de reloj y debemos disminuir los quantum que le quedan al procedimiento del cpu. En el caso de que estos terminen en 0 debemos 
 plantearnos si debemos desalojar la tarea para poner otra(Si es la IDLE no hacemos nada). De ser el caso, pondremos la tarea actual en la cola enEspera y el próximo elemento
-en esta será el nuevo que se hirá ejecutando en este núcleo. Reseteamos el quantum$\_$restantes para que tenga el valor de cpu$\_$quantum. Notece que si no hay más tareas
+en esta será el nuevo que se hirá ejecutando en este núcleo. Reseteamos el quantum$\_$restantes para que tenga el valor de cpu$\_$quantum del core donde se encuentra. Notece que si no hay más tareas
 excepto por la que se estaba ejecutando se volverá a ejecutar la misma.
 
 BLOCK: Si el proceso se va a bloquear añadimos el pid a pid$\_$bloqueados, si existe algún proceso en ready, lo ponemos a ejecutar en ese core. De solo ser un tick en el cual

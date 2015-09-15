@@ -9,11 +9,11 @@ using namespace std;
 SchedRR2::SchedRR2(vector<int> argn) {
 	// Round robin recibe la cantidad de cores y sus cpu_quantum por parámetro
 	cant_cores = argn[0];
-	cpu_quantum = argn[1];
 	nucleos.resize(cant_cores);
 	for(int i = 0; i < cant_cores; i++){
 		nucleos[i].pidActual = IDLE_TASK;
 		nucleos[i].quantum_restantes = 0;
+		nucleos[i].cpu_quantum = argn[i+1];
 	}
 }
 
@@ -113,7 +113,7 @@ int SchedRR2::tick(int cpu, const enum Motivo m) {
 			if(!nucleos[cpu].enEspera.empty()){ 		//Si hay un proceso en la cola, lo cargo para ejecucion.
 				nucleos[cpu].pidActual = nucleos[cpu].enEspera.front();
 				nucleos[cpu].enEspera.pop();
-				nucleos[cpu].quantum_restantes = cpu_quantum;	
+				nucleos[cpu].quantum_restantes = nucleos[cpu].cpu_quantum;	
 			}
 			
 			
@@ -128,7 +128,7 @@ int SchedRR2::tick(int cpu, const enum Motivo m) {
 		if(!nucleos[cpu].enEspera.empty()){ //Si hay un proceso en la cola, lo cargo para ejecucion.
 			nucleos[cpu].pidActual = nucleos[cpu].enEspera.front();
 			nucleos[cpu].enEspera.pop();
-			nucleos[cpu].quantum_restantes = cpu_quantum;
+			nucleos[cpu].quantum_restantes = nucleos[cpu].cpu_quantum;
 		}
 		
 	}
@@ -142,7 +142,7 @@ int SchedRR2::tick(int cpu, const enum Motivo m) {
 		if(!nucleos[cpu].enEspera.empty()){ 	//Si hay un proceso en la cola, lo cargo para ejecucion.
 			nucleos[cpu].pidActual = nucleos[cpu].enEspera.front();
 			nucleos[cpu].enEspera.pop();
-			nucleos[cpu].quantum_restantes = cpu_quantum;
+			nucleos[cpu].quantum_restantes = nucleos[cpu].cpu_quantum;
 		}
 
 	}

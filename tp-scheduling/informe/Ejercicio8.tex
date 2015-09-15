@@ -4,7 +4,7 @@
 \subsection{Desarrollo}
 Similar  a lo visto en el ejercicio 8, tendremos que programar la estructura de un scheduler de Round-Robin. La diferencia es que en este caso en vez de tener una cola única 
 que vaya guardando todos los procesos, cada core tendrá su propia cola de procesos. Para resolver esto utilizaremos una estructura para representar el core que nos dará la 
-siguiente información: un entero pidActual, un entero quantum$\_$restantes, su cola de pids enEspera, un vector pid$\_$bloqueados que indica cuales están en ese estado.
+siguiente información: un entero pidActual, un entero cpu$\_$quantum, un entero quantum$\_$restantes, su cola de pids enEspera, un vector pid$\_$bloqueados que indica cuales están en ese estado.
 
 Después tenemos la cantidad de cores y el quantum de los mismos. Por último necesitamos agrupar las estructuras core que tenemos. Para esto usamos simplemente un vector 
 (nucleos).

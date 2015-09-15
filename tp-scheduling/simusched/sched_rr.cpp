@@ -9,11 +9,11 @@ using namespace std;
 SchedRR::SchedRR(vector<int> argn) {
 	// Round robin recibe la cantidad de cores y sus cpu_quantum por parámetro
 	cant_cores = argn[0];
-	cpu_quantum = argn[1];
 
 	for(int i = 0; i < cant_cores; i++){
 		pid_cores.push_back(IDLE_TASK);  		//Los cores que no tengan un proceso ejecutando le ponemos la tarea idle
 		quantum_restantes.push_back(0);
+		cpu_quantum.push_back(argn[i+1]);
 	}
 
 }
@@ -76,7 +76,7 @@ int SchedRR::tick(int cpu, const enum Motivo m) {
 			if(!enEspera.empty()){  //Si hay un proceso en la cola, lo cargo para ejecucion.
 				pid_cores[cpu] = enEspera.front();
 				enEspera.pop();
-				quantum_restantes[cpu] = cpu_quantum;	
+				quantum_restantes[cpu] = cpu_quantum[cpu];	
 			}
 			
 			
@@ -91,7 +91,7 @@ int SchedRR::tick(int cpu, const enum Motivo m) {
 		if(!enEspera.empty()){ //Si hay un proceso en la cola, lo cargo para ejecucion.
 			pid_cores[cpu] = enEspera.front();
 			enEspera.pop();
-			quantum_restantes[cpu] = cpu_quantum;
+			quantum_restantes[cpu] = cpu_quantum[cpu];
 		}
 		
 	}
@@ -105,7 +105,7 @@ int SchedRR::tick(int cpu, const enum Motivo m) {
 		if(!enEspera.empty()){ //Si hay un proceso en la cola, lo cargo para ejecucion.
 			pid_cores[cpu] = enEspera.front();
 			enEspera.pop();
-			quantum_restantes[cpu] = cpu_quantum;
+			quantum_restantes[cpu] = cpu_quantum[cpu];
 		}
 
 	}

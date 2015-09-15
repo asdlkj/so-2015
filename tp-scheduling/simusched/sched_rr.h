@@ -20,9 +20,9 @@ class SchedRR : public SchedBase {
 		
 		vector<int> pid_cores;
 		vector<int> pid_bloqueados;  //Los procesos que estan bloqueados.
+		vector<int> cpu_quantum;
 		vector<int> quantum_restantes;
 		int cant_cores;
-		int cpu_quantum;
 		queue<int> enEspera;  //Cola global donde estan los que estan en ready
 };
 

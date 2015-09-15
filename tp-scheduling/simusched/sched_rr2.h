@@ -23,6 +23,7 @@ class SchedRR2 : public SchedBase {
 
 		struct core
 		{
+			int cpu_quantum;
 			int pidActual;
 			int quantum_restantes; 
 			queue<int> enEspera;
@@ -31,7 +32,7 @@ class SchedRR2 : public SchedBase {
 
 		vector<core> nucleos;
 		int cant_cores;
-		int cpu_quantum;
+		
 };
 
 #endif
