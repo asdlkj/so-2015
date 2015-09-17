@@ -2,9 +2,10 @@
 \section{Ejercicio 3}
 
 \subsection{Desarrollo}
-Para poder resolver el problema de TaskBatch lo que hacemos es generar cant$\_$bloqueos valores aleatorios no repetidos que no estén ubicados fuera de total$\_$cpu. 
-Lo generado por esto podría no estar ordenado, así que le hacemos un sort al resultado. Por último ciclaremos total$\_$cpu veces y en las posiciones donde se tendría que 
-bloquear hacemos la llamada usa$\_$IO con duración de 1.
+Para poder resolver el problema de TaskBatch lo que hacemos es generar cant$\_$bloqueos valores aleatorios no repetidos que no estén ubicados fuera de total$\_$cpu. Usando la
+función rand y en cada momento guardarnos el resultado en un vector. Siempre revisamos los valores hasta el que estamos agregando para asegurarnos de que no estamos repitiendo
+ninguno. Lo generado por esto podría no estar ordenado, así que le hacemos un sort al resultado. Por último ciclaremos total$\_$cpu veces y en las posiciones donde se tendría que 
+bloquear(que esten en el vector que nos armamos) hacemos la llamada usa$\_$IO con duración de 1.
 
 \subsection{Experimentación}
 Siguiendo lo pedido por enunciado, realizaremos el gráfico del loteEj3.tsk usando el FCFS y nos queda lo siguiente:

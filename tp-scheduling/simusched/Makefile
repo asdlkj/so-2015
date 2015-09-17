@@ -34,6 +34,9 @@ ejercicio4:
 	./simusched Lotes/lote_simple.tsk 1 1 1 SchedRR 10 | ./graphsched.py > Lotes/imagenes/Ej4Experimento1.png 
 	./simusched Lotes/lote_simple.tsk 2 1 1 SchedRR 10 10 | ./graphsched.py > Lotes/imagenes/Ej4Experimento2.png
 	./simusched Lotes/lote_simple.tsk 2 1 1 SchedRR 10 50 | ./graphsched.py > Lotes/imagenes/Ej4Experimento3.png
+	./simusched Lotes/lote_simple2.tsk 1 1 1 SchedRR 10 | ./graphsched.py > Lotes/imagenes/Ej4Experimento4.png 
+	./simusched Lotes/lote_simple2.tsk 2 1 1 SchedRR 10 10 | ./graphsched.py > Lotes/imagenes/Ej4Experimento5.png
+	./simusched Lotes/lote_simple2.tsk 2 1 1 SchedRR 10 50 | ./graphsched.py > Lotes/imagenes/Ej4Experimento6.png
 ejercicio5:
 	./simusched Lotes/loteEj5.tsk 1 2 1 SchedRR 2 | ./graphsched.py > Lotes/imagenes/Ej5_q2.png 
 	./simusched Lotes/loteEj5.tsk 1 2 1 SchedRR 10 | ./graphsched.py > Lotes/imagenes/Ej5_q10.png 
