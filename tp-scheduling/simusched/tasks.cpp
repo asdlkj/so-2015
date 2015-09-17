@@ -48,29 +48,36 @@ void TaskBatch(int pid, vector<int> params){//params: total_cpu y cant_bloqueos
 	srand(time(NULL));
 	int total_cpu = params[0];
 	int cant_bloqueos = params[1];
-	vector<int> momentoABloquear(cant_bloqueos);
-	int i = 0; 
-	//Me armo un arreglo con los momentos donde se va a bloquear
-	while(i < cant_bloqueos){
-		int valor = rand()%total_cpu;
-		if(!esta(momentoABloquear, i, valor)){
-			momentoABloquear[i] = valor;
-			i++;
-		}	
+	if(cant_bloqueos == 0){ //En el caso que no tengamos que bloquear nunca entonces simplemente ejecutarmos cpu
+		uso_CPU(pid, total_cpu);
 	}
-	//Lo ordeno
-	sort(momentoABloquear.begin(), momentoABloquear.end());
-	//Realizo el proceso de cpu y bloqueos
-	i = 0;
-	for(int j = 0; j < total_cpu; j++){
-		if(momentoABloquear[i] == j){
-			uso_IO(pid, 1);
-			i++;
+	else{
+
+		vector<int> momentoABloquear(cant_bloqueos);
+		int i = 0; 
+		//Me armo un arreglo con los momentos donde se va a bloquear
+		while(i < cant_bloqueos){
+			int valor = rand()%total_cpu;
+			if(!esta(momentoABloquear, i, valor)){
+				momentoABloquear[i] = valor;
+				i++;
+			}	
 		}
-		else{
-			uso_CPU(pid, 1);
+		//Lo ordeno
+		sort(momentoABloquear.begin(), momentoABloquear.end());
+		//Realizo el proceso de cpu y bloqueos
+		i = 0;
+		for(int j = 0; j < total_cpu; j++){
+			if(momentoABloquear[i] == j){
+				uso_IO(pid, 1);
+				i++;
+			}
+			else{
+				uso_CPU(pid, 1);
+			}
 		}
 	}
+	
 
 }
 
