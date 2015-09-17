@@ -19,7 +19,13 @@ Por último tenemos la función tick. El código es equivalente al del ejercicio
 
 \subsection{Experimentación}
 Según lo pedido debemos mencionar un caso donde la migración de núcleos sea beneficiosa y otro donde no. Para lo segundo, usaremos dos core y cuatro tareas que irán apareciendo
-en este orden: la más costosa,  la menos costosa, la segunda más costosa y la segunda menos costosa. Usaremos, en los dos cores, un quantum de 20 y nos queda lo siguiente:
+en este orden: la más costosa,  la menos costosa, la segunda más costosa y la segunda menos costosa. Usaremos, en los dos cores, un quantum de 5(para todos) y nos queda lo siguiente:
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=1.1\textwidth]{imagenes/Ej8Experimento3.png}
+  \caption{loteEj8Experimento1.tsk con RR}
+\end{figure}
 
 \begin{figure}[H]
   \centering
@@ -32,11 +38,17 @@ la más costosa, la segunda más costosa, la menos costosa y la segunda menos co
 
 \begin{figure}[H]
   \centering
+    \includegraphics[width=1.1\textwidth]{imagenes/Ej8Experimento4.png}
+  \caption{loteEj8Experimento2.tsk con RR}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
     \includegraphics[width=1.1\textwidth]{imagenes/Ej8Experimento2.png}
   \caption{loteEj8Experimento2.tsk con RR2}
 \end{figure}
 
-Podemos ver que efectivamente el primer gráfico muestra que se tarda más en completar los procesos. Esto se debe a que el orden que le dimos a las tareas hace que el primer
+Podemos ver que efectivamente el primer caso se tarda más en completar los procesos con RR2 que con RR. Esto se debe a que el orden que le dimos a las tareas hace que el primer
 procesador se le asigne las tareas más largas y costosas, mientras que el segundo tiene las más cortas. En ese sentido se muestra como la mayor parte del trabajo recae en uno de ellos
-mientras que el otro termina y queda en ready mucho más rápido. Para el segundo experimento, al cambiar el orden podemos apreciar que los dos procesadores tienen una tarea
-muy costosa y otra no tanto. Efectivamente termina más rápido ya que el trabajo se distribuye de forma más justa.
+mientras que el otro termina y queda en ready mucho más rápido. Para el segundo experimento, al cambiar el orden podemos apreciar que los dos procesadores tienen una tarea muy costosa y otra no tanto. Efectivamente termina más rápido que el de RR común ya que el trabajo se distribuye de forma más justa. Para el que posee migración de procesos, obserbamos que terminan al mismo tiempo para los dos casos. Esto se debe a que en realidad el orden de estas tareas, que es lo que cambia, no afecta demasiado a la ejecución como tal a diferencia del otro sched.
+
