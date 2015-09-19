@@ -1,7 +1,5 @@
 TaskCPU 100
-@1:
-TaskCPU 80
-@2:
-TaskCPU 10
-@3:
-TaskCPU 20
+@6:
+TaskCPU 30
+@12:
+TaskCPU 30
