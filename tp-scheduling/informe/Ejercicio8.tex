@@ -33,22 +33,4 @@ en este orden: la más costosa,  la menos costosa, la segunda más costosa y la 
   \caption{loteEj8Experimento1.tsk con RR2}
 \end{figure}
 
-Para el caso en el que sea beneficiosa vamos a usar el mismo lote de tareas, pero las cambiaremos de orden para que sean así: 
-la más costosa, la segunda más costosa, la menos costosa y la segunda menos costosa. Nos queda lo siguiente:
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[width=1.1\textwidth]{imagenes/Ej8Experimento4.png}
-  \caption{loteEj8Experimento2.tsk con RR}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[width=1.1\textwidth]{imagenes/Ej8Experimento2.png}
-  \caption{loteEj8Experimento2.tsk con RR2}
-\end{figure}
-
-Podemos ver que efectivamente el primer caso se tarda más en completar los procesos con RR2 que con RR. Esto se debe a que el orden que le dimos a las tareas hace que el primer
-procesador se le asigne las tareas más largas y costosas, mientras que el segundo tiene las más cortas. En ese sentido se muestra como la mayor parte del trabajo recae en uno de ellos
-mientras que el otro termina y queda en ready mucho más rápido. Para el segundo experimento, al cambiar el orden podemos apreciar que los dos procesadores tienen una tarea muy costosa y otra no tanto. Efectivamente termina más rápido que el de RR común ya que el trabajo se distribuye de forma más justa. Para el que posee migración de procesos, obserbamos que terminan al mismo tiempo para los dos casos. Esto se debe a que en realidad el orden de estas tareas, que es lo que cambia, no afecta demasiado a la ejecución como tal a diferencia del otro sched.
-
+Podemos ver que efectivamente
