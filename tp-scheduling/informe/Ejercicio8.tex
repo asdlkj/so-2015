@@ -118,5 +118,5 @@ El cambio es que las ejecuciones tendrán un costo de migración de núcleos de 
 \end{tabular}
 
 Podemos ver que, en este caso, el waiting time promedio y el tiempo total promedio son mejores en el que no tiene migración de núcleos. Esto es debido a que el scheduler RR2
-no paga el costo de migración porque cada tarea se ejecuta siempre en el mismo núcleo, mientras que RR cada vez que desaloja una tarea tarda más tiempo si la próxima se estuvo
+no paga el costo de migración porque cada tarea se ejecuta siempre en el mismo núcleo, mientras que RR cada vez que desaloja una tarea tarda más tiempo si la próxima no se estuvo
 ejecutando en el mismo core. El lote esta pensado para que esto suceda.
