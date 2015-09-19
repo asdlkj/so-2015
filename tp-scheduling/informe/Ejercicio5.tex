@@ -19,7 +19,7 @@ Para \verb|TaskConsola| de parámetros 5 3 3, son 21 ciclos, pues son 5 ciclos d
 \item[fin] Tiempo en el que finaliza la tarea. En el diagrama de Gantt es en el ciclo en el que se realiza el UNLOAD.
 \item[latencia] Cantidad de ciclos desde que se carga la tarea hasta que comienza a correr por primera vez.
 \item[tiempo total] Tiempo que tarda la tarea en ejecutarse. En el diagrama de Gantt es la diferencia entre el ciclo en el que termina la tarea y el que se carga: fin - inicio.
-\item[waiting time] Tiempo en el que la tarea permanece sin hacer nada: tiempo total - tiempo que corre la tarea
+\item[waiting time] Tiempo en el que la tarea permanece sin hacer nada: tiempo total - tiempo que corre la tarea - tiempo en que la tarea permanece bloqueada.
 \end{description}
 \subsection{Experimentación}
 En las figuras \ref{fig:ej5q2},  \ref{fig:ej5q10} y \ref{fig:ej5q50} se representaron los diagramas de Gantt para los quantums 2, 10 y 50 respectivamente. Se puede ver, cómo a quantums más chicos (figura \ref{fig:ej5q2}), el scheduler permanece considerable tiempo haciendo cambios de contexto de 2 ciclos. Aún así, en quantums chicos, las tareas de E/S terminan antes que con los quantums más grandes.\par
@@ -53,8 +53,8 @@ En las tablas \ref{tab:ej5q2},  \ref{tab:ej5q10} y \ref{tab:ej5q50} se represent
 3 & 21 & 0 & 105 & 14 & 84 & 105\\
 4 & 21 & 0 & 108 & 17 & 87 & 108\\
   \hline
-promedio & - & - & - & 9.8 & CPU: 291  & CPU: 342 \\
-                & &  &  &  & E/S: 85.5  & E/S: 106.5\\
+promedio & - & - & - & 9.8 & TaskCPU: 291  & TaskCPU: 342 \\
+                & &  &  &  & TaskConsola: 85.5  & TaskConsola: 106.5\\
   \hline
 \end{tabular}
 \caption{Tiempos para loteEj5.tsk con RR y quantum 2}\label{tab:ej5q2}
@@ -72,8 +72,8 @@ promedio & - & - & - & 9.8 & CPU: 291  & CPU: 342 \\
 3 & 21 & 0 & 222 & 38 & 201 & 222\\
 4 & 21 & 0 & 225 & 41 & 204 & 225\\
   \hline
-promedio & - & - & - & 24.2 & CPU: 165  & CPU: 216\\
-                & &  &  &  & E/S: 202.5  & E/S: 223.5\\
+promedio & - & - & - & 24.2 & TaskCPU: 165  & TaskCPU: 216\\
+                & &  &  &  & TaskConsola: 202.5  & TaskConsola: 223.5\\
 \hline
 \end{tabular}
 \caption{Tiempos para loteEj5.tsk con RR y quantum 10}\label{tab:ej5q10}
@@ -91,8 +91,8 @@ promedio & - & - & - & 24.2 & CPU: 165  & CPU: 216\\
 3 & 21 & 0 & 198 & 158 & 177 & 198\\
 4 & 21 & 0 & 201 & 161 & 180 & 201\\
   \hline
-promedio & - & - & - & 96.2 & CPU: 117  & CPU: 168 \\
-                & &  &  &  & E/S: 178.5  & E/S: 199.5\\
+promedio & - & - & - & 96.2 & TaskCPU: 117  & TaskCPU: 168 \\
+                & &  &  &  & TaskConsola: 178.5  & TaskConsola: 199.5\\
   \hline
 \end{tabular}
 \caption{Tiempos para loteEj5.tsk con RR y quantum 50}\label{tab:ej5q50}
