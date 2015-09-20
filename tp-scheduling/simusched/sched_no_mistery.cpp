@@ -19,16 +19,16 @@ typedef std::tuple<int, bool, int, int>  tarea;	//pid, blokeado, tiempo que corr
 SchedNoMistery::SchedNoMistery(vector<int> argn) {
 	primero = true;
 	tiempos.push_back(1);
-	for (unsigned int i = 0; i < argn.size(); i++)
+	for (unsigned int i = 1; i < argn.size(); i++)
 	{
-		tiempos[i+1] = argn[i];
+		tiempos.push_back(argn[i]);
 	}
 	
 }
 
 void SchedNoMistery::load(int pid) {
 	//cargo las tareas con su pid + FREE (xq no comienzan blokeadas) y hago it.begin() con el primer load
-	tarea tareaAux = make_tuple (pid, FREE, 0, tiempos[0]);
+	tarea tareaAux = make_tuple (pid, FREE, 0, 1);
 	tasks.push_back(tareaAux);
 	if (primero)
 	{
@@ -40,21 +40,22 @@ void SchedNoMistery::load(int pid) {
 
 void SchedNoMistery::unblock(int pid) {	
 	int cont = tasks.size();
-	while (cont >= 0) //recorre todos y vuelve al punto de partida. al final it está en la misma posición de la que salió.
+	//cerr << "task actual: " << _PID << " | task a desblokear: " << pid;
+	while (cont > 0) //recorre todos y vuelve al punto de partida. al final it está en la misma posición de la que salió.
 	{
 		if (pid == _PID)
-			_bloqueo = FREE;
+			_bloqueo = FREE; 
 		
 		++it;
 		if (it == tasks.end())
 			it = tasks.begin();
 			
 		cont--;
-	}
+	}	
+	//cerr << " | task donde termina: " << _PID << endl;
 }
 
 int SchedNoMistery::tick(int cpu, const enum Motivo m) {
-
 	int pid;
 	if (m == BLOCK)
 	{
@@ -94,15 +95,43 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 		pid = IDLE_TASK;
 	else
 	{
-		pid = _PID;
 		//si le quedan tics para correr, le resto uno (el que acaba de ocurrir). sino, averiguo cuantos tendrá en la nueva llamada al proceso.
 		if (_tiempoRestante > 1)
 			_tiempoRestante = _tiempoRestante -1;
 		else
 		{
-			_indiceTiempos = max(_indiceTiempos +1 , (int)tiempos.size()-1);
+			_indiceTiempos = min(_indiceTiempos +1 , (int)tiempos.size()-1);
 			_tiempoRestante = tiempos[_indiceTiempos];
+
+			int _min = _indiceTiempos;
+			cont = tasks.size();
+			while (cont > 0)	//busco la tarea mas "atrasada"
+			{
+				if (_indiceTiempos < _min)
+				{
+					_min = _indiceTiempos;
+				}
+				
+				++it;
+				if (it == tasks.end())
+					it = tasks.begin();	
+				cont--;
+			}
+			cont = tasks.size();
+			while (cont > 0)	//me paro sobre la tarea mas atrasada
+			{
+				++it;
+				if (it == tasks.end())
+					it = tasks.begin();
+				cont--;
+				
+				if (_indiceTiempos == _min)
+				{
+					break;
+				}
+			}
 		}
+		pid = _PID;
 	}
 	return pid;
 }
