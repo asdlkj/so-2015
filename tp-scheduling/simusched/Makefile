@@ -27,8 +27,7 @@ ejericio2:
 	./simusched Lotes/loteEj2.tsk 1 4 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png 
 	./simusched Lotes/loteEj2.tsk 2 4 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento2.png 
 ejercicio3:
-	./simusched Lotes/loteEj3.tsk 1 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png
-	./simusched Lotes/loteEj3.tsk 2 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento1.png 
+	./simusched Lotes/loteEj3.tsk 1 1 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej3Experimento.png
 
 ejercicio4:
 	./simusched Lotes/lote_simple.tsk 1 1 1 SchedRR 10 | ./graphsched.py > Lotes/imagenes/Ej4Experimento1.png 
