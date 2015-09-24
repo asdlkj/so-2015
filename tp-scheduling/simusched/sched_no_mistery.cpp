@@ -39,10 +39,11 @@ void SchedNoMistery::load(int pid) {
 	}
 	else
 	{
-		++it;
-		tasks.insert(it,tareaAux);
-		--it;
-		--it;
+		tasks.push_back(tareaAux);
+		// ++it;
+		// tasks.insert(it,tareaAux);
+		// --it;
+		// --it;
 	}
 	
 }
@@ -137,7 +138,7 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 			while (cont > 0)	//busco la tarea mas "atrasada"
 			{
 				cont--;
-				if (get<2>(*itMin) < _min)
+				if (get<2>(*itMin) < _min && get<1>(*itMin) != BUSY)
 				{
 					_min = get<2>(*itMin);
 				}
