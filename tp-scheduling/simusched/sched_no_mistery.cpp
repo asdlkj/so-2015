@@ -30,31 +30,11 @@ SchedNoMistery::SchedNoMistery(vector<int> argn) {
 void SchedNoMistery::load(int pid) {
 	//cargo las tareas con su pid + FREE (xq no comienzan blokeadas) y hago it.begin() con el primer load
 	tarea tareaAux = make_tuple (pid, FREE, 0, 1);
-	/*
-	if (primero)
-	{
-	*/
-		tasks.push_back(tareaAux);
-		it = tasks.begin();
-		primero = false;
-	/*
-	}
-	else
-	{
-<<<<<<< HEAD
-		++it;
-		tasks.insert(it,tareaAux);
-		//--it;
-		//--it;
-=======
-		tasks.push_back(tareaAux);
-		// ++it;
-		// tasks.insert(it,tareaAux);
-		// --it;
-		// --it;
->>>>>>> feb09d4c9eb04223ef87e0a9b8efeca34c4108b9
-	}
-	*/
+
+	tasks.push_back(tareaAux);
+	it = tasks.begin();
+	primero = false;
+
 }
 
 void SchedNoMistery::unblock(int pid) {	
@@ -144,11 +124,7 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 			while (cont > 0)	//busco la tarea mas "atrasada"
 			{
 				cont--;
-<<<<<<< HEAD
 				if (get<2>(*itMin) < _min && get<1>(*itMin) == FREE)
-=======
-				if (get<2>(*itMin) < _min && get<1>(*itMin) != BUSY)
->>>>>>> feb09d4c9eb04223ef87e0a9b8efeca34c4108b9
 				{
 					_min = get<2>(*itMin);
 				}
