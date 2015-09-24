@@ -18,6 +18,7 @@ typedef std::tuple<int, bool, int, int>  tarea;	//pid, blokeado, tiempo que corr
 
 SchedNoMistery::SchedNoMistery(vector<int> argn) {
 	primero = true;
+	primero2 = true;
 	tiempos.push_back(1);
 	for (unsigned int i = 1; i < argn.size(); i++)
 	{
@@ -29,11 +30,19 @@ SchedNoMistery::SchedNoMistery(vector<int> argn) {
 void SchedNoMistery::load(int pid) {
 	//cargo las tareas con su pid + FREE (xq no comienzan blokeadas) y hago it.begin() con el primer load
 	tarea tareaAux = make_tuple (pid, FREE, 0, 1);
-	tasks.push_back(tareaAux);
+	
 	if (primero)
 	{
+		tasks.push_back(tareaAux);
 		it = tasks.begin();
 		primero = false;
+	}
+	else
+	{
+		++it;
+		tasks.insert(it,tareaAux);
+		--it;
+		--it;
 	}
 	
 }
@@ -56,7 +65,26 @@ void SchedNoMistery::unblock(int pid) {
 }
 
 int SchedNoMistery::tick(int cpu, const enum Motivo m) {
+	if (primero)
+	{
+		cerr << "entra en tick antes del primer load" << endl;
+	}
+	
+	//cerr << "m = " << m << " & pid = " << current_pid(cpu) << " | ";
 	int pid;
+	
+	if(current_pid(cpu) == -1) 
+	{
+		cerr << "current_pid(cpu) == -1" << endl;
+		for (list<tarea>::iterator i = tasks.begin(); i != tasks.end(); ++i)
+		{
+			cerr << get<0>(*i) << " | ";
+		}
+		cerr << endl;
+		it = tasks.begin();
+		return _PID;
+	}
+		 
 	if (m == BLOCK)
 	{
 		if (tasks.empty())
@@ -102,33 +130,29 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 		{
 			_indiceTiempos = min(_indiceTiempos +1 , (int)tiempos.size()-1);
 			_tiempoRestante = tiempos[_indiceTiempos];
-
+			
+			list<tarea>::iterator itMin = tasks.begin();
 			int _min = _indiceTiempos;
-			cont = tasks.size();
+			int cont = tasks.size();
 			while (cont > 0)	//busco la tarea mas "atrasada"
 			{
-				if (_indiceTiempos < _min)
-				{
-					_min = _indiceTiempos;
-				}
-				
-				++it;
-				if (it == tasks.end())
-					it = tasks.begin();	
 				cont--;
+				if (get<2>(*itMin) < _min)
+				{
+					_min = get<2>(*itMin);
+				}
+				++itMin;
 			}
+			//it = tasks.begin();
 			cont = tasks.size();
-			while (cont > 0)	//me paro sobre la tarea mas atrasada
+			while (cont > 0)	//me paro sobre la primera tarea mas atrasada
 			{
+				cont--;
 				++it;
 				if (it == tasks.end())
 					it = tasks.begin();
-				cont--;
-				
 				if (_indiceTiempos == _min)
-				{
 					break;
-				}
 			}
 		}
 		pid = _PID;

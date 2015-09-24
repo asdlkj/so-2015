@@ -25,6 +25,7 @@ class SchedNoMistery : public SchedBase {
 		list<tarea>::iterator it;
 		vector<int> tiempos;
 		bool primero;
+		bool primero2;
 };
 
 #endif
