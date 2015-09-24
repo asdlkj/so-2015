@@ -30,21 +30,23 @@ SchedNoMistery::SchedNoMistery(vector<int> argn) {
 void SchedNoMistery::load(int pid) {
 	//cargo las tareas con su pid + FREE (xq no comienzan blokeadas) y hago it.begin() con el primer load
 	tarea tareaAux = make_tuple (pid, FREE, 0, 1);
-	
+	/*
 	if (primero)
 	{
+	*/
 		tasks.push_back(tareaAux);
 		it = tasks.begin();
 		primero = false;
+	/*
 	}
 	else
 	{
 		++it;
 		tasks.insert(it,tareaAux);
-		--it;
-		--it;
+		//--it;
+		//--it;
 	}
-	
+	*/
 }
 
 void SchedNoMistery::unblock(int pid) {	
@@ -65,30 +67,27 @@ void SchedNoMistery::unblock(int pid) {
 }
 
 int SchedNoMistery::tick(int cpu, const enum Motivo m) {
-	if (primero)
-	{
-		cerr << "entra en tick antes del primer load" << endl;
-	}
-	
-	//cerr << "m = " << m << " & pid = " << current_pid(cpu) << " | ";
 	int pid;
-	
-	if(current_pid(cpu) == -1) 
+
+	if(primero2)
 	{
-		cerr << "current_pid(cpu) == -1" << endl;
-		for (list<tarea>::iterator i = tasks.begin(); i != tasks.end(); ++i)
+		cerr << "primero2 = true & " << tasks.size() << endl; 
+		for (list<tarea>::iterator it2 = tasks.begin(); it2 != tasks.end(); ++it2)
 		{
-			cerr << get<0>(*i) << " | ";
+			cerr <<  "_PID = " << get<0>(*it2) << " &  _bloqueo = " << get<1>(*it2) <<  "_indiceTiempos = " << get<2>(*it2) << " &  _tiempoRestante = " << get<3>(*it2) << endl;
 		}
-		cerr << endl;
+		
 		it = tasks.begin();
+		primero2 = false;
+		cerr << _PID << endl;
 		return _PID;
 	}
+
 		 
 	if (m == BLOCK)
 	{
 		if (tasks.empty())
-			cerr << "m == BLOCK cuando task.empty() == true" << endl;
+			cerr << "m == BLOCK cuando task.empty()" << endl;
 			
 		_bloqueo = BUSY;
 		
@@ -101,7 +100,7 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 		if (m == EXIT)
 		{
 			if (tasks.empty())
-				cerr << "m == EXIT cuando task.empty() == true" << endl;
+				cerr << "m == EXIT cuando task.empty()" << endl;
 			else
 				it = tasks.erase(it);	//incluye ++it
 		}
@@ -120,7 +119,7 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 		cont--;
 	}
 	if (_bloqueo == BUSY) //recorrió todas las tareas y están todas ocupadas
-		pid = IDLE_TASK;
+			pid = IDLE_TASK;
 	else
 	{
 		//si le quedan tics para correr, le resto uno (el que acaba de ocurrir). sino, averiguo cuantos tendrá en la nueva llamada al proceso.
@@ -132,16 +131,21 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 			_tiempoRestante = tiempos[_indiceTiempos];
 			
 			list<tarea>::iterator itMin = tasks.begin();
-			int _min = _indiceTiempos;
+			int _min = 999;
 			int cont = tasks.size();
 			while (cont > 0)	//busco la tarea mas "atrasada"
 			{
 				cont--;
-				if (get<2>(*itMin) < _min)
+				if (get<2>(*itMin) < _min && get<1>(*itMin) == FREE)
 				{
 					_min = get<2>(*itMin);
 				}
 				++itMin;
+			}
+			if (_min == 999)
+			{
+				return IDLE_TASK;
+				cerr << "idle" << endl;
 			}
 			//it = tasks.begin();
 			cont = tasks.size();
@@ -151,11 +155,17 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 				++it;
 				if (it == tasks.end())
 					it = tasks.begin();
-				if (_indiceTiempos == _min)
+					
+				if (_indiceTiempos == _min && get<1>(*it) == FREE)
 					break;
-			}
+			}			
 		}
 		pid = _PID;
+		if (_bloqueo == BUSY)
+		{
+			cerr << "fuck" << endl;
+		}
+		
 	}
 	return pid;
 }
