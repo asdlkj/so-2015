@@ -16,35 +16,29 @@ typedef pair<int, int> _pid;	//pid = pair<pid, lista en la q esta (y si la tarea
 
 
 SchedNoMistery::SchedNoMistery(vector<int> argn) {
-	cerr << "Inicio" << endl;
-	tiempos.push_back(1);
+	tiempos.resize(argn.size());
+	cerr << "Antes de task.resize(argn.size())" << endl;
+	//tasks.resize(argn.size());
+	list<tarea> aux;
+	cerr << "Dsp de task.resize(argn.size())" << endl;
 	for (unsigned int i = 0; i < argn.size(); i++)
 	{
-		cerr << "argn[" << (i) << "] = " << argn[i] << endl;
-		tiempos.push_back((int)argn[i]);	//en tiempos guardo los distintos quantum
+		tiempos[i] = argn[i];	//en tiempos guardo los distintos quantum
 	}
-	cerr << "argn[" << (argn.size()-1) << "] = " << argn[argn.size()-1] << endl;
-	cerr << "antes de task.size" << endl;
-	tasks.resize((int)argn.size());	//modifico el tama;o de tasks ahora que se exactamente cuantas listas de prioridad tengo
-	cerr << "dsp de task.size" << endl;
+	for (unsigned int i = 0; i < argn.size(); i++)
+	{
+		cerr << i <<") Antes de task.push_back(aux)" << endl << endl;
+		tasks.push_back(aux);
+		cerr << i <<") Dsp de task.push_back(aux)" << endl;
+	}
 	listaMenor = 0;
 }
 
 void SchedNoMistery::load(int pid) {
-<<<<<<< HEAD
 	//cargo las tareas con su pid
 	tarea tareaAux = make_tuple (pid, 0);
 	tasks[0].push_back(tareaAux);
 	dicTareas.push_back(make_pair(pid, 0));
-=======
-	//cargo las tareas con su pid + FREE (xq no comienzan blokeadas) y hago it.begin() con el primer load
-	tarea tareaAux = make_tuple (pid, FREE, 0, 1);
-
-	tasks.push_back(tareaAux);
-	it = tasks.begin();
-	primero = false;
-
->>>>>>> 36093d8228ad17201e5b92f79f2232e163588a31
 }
 
 void SchedNoMistery::unblock(int pid) {
@@ -121,12 +115,7 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 			//diferencia con bloquear: saco la tarea de list<_pid> dicTareas
 			for (list<_pid>::iterator it2 = dicTareas.begin() ; it2 != dicTareas.end() ; ++it2)
 			{
-<<<<<<< HEAD
 				if (pid == it2->first)
-=======
-				cont--;
-				if (get<2>(*itMin) < _min && get<1>(*itMin) == FREE)
->>>>>>> 36093d8228ad17201e5b92f79f2232e163588a31
 				{
 					it2 = dicTareas.erase(it2);	//incluye ++it2
 					break;
