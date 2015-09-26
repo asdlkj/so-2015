@@ -13,8 +13,6 @@
 
 using namespace std;
 
-typedef std::tuple<int, int>  tarea;	//pid, tiempo que lleva corriendo
-typedef pair<int, int> _pid;	//pid = pair<pid, lista en la q esta (y si la tarea esta blokeada es la lista a la que ira)>
 
 
 class SchedNoMistery : public SchedBase {
@@ -25,12 +23,19 @@ class SchedNoMistery : public SchedBase {
 		virtual int tick(int cpu, const enum Motivo m);
 		
 	private:
-		list<_pid> dicTareas; 
-		list<tarea>::iterator it;
-		int listaMenor;
+		struct tarea
+		{
+			int pid;
+			int nivel;
+		};
 		
-		vector<int> tiempos;
-		vector<list<tarea> > tasks;
+		tarea Actual;
+		int quantumRestante;
+		vector<queue<tarea>> tareas;
+		vector<int> quantums;
+		vector<tarea> bloqueados;
+
+
 };
 
 #endif
