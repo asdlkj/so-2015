@@ -5,13 +5,17 @@
 #include <queue>
 #include <iostream>
 #include <list>
-#include <utility>
+#include <utility>      // std::pair, std::make_pair
 #include <tuple>        // std::tuple, std::get
 #include "basesched.h"
 
+
+
 using namespace std;
 
-typedef std::tuple<int, bool, int, int>  tarea;	//pid, blokeado, tiempo que corre(total, indice del vector tiempos), tiempo restante del total
+typedef std::tuple<int, int>  tarea;	//pid, tiempo que lleva corriendo
+typedef pair<int, int> _pid;	//pid = pair<pid, lista en la q esta (y si la tarea esta blokeada es la lista a la que ira)>
+
 
 class SchedNoMistery : public SchedBase {
 	public:
@@ -21,11 +25,12 @@ class SchedNoMistery : public SchedBase {
 		virtual int tick(int cpu, const enum Motivo m);
 		
 	private:
-		list<tarea> tasks; //tendrá la información de la tarea y si está blokeada o no
+		list<_pid> dicTareas; 
 		list<tarea>::iterator it;
+		int listaMenor;
+		
 		vector<int> tiempos;
-		bool primero;
-		bool primero2;
+		vector<list<tarea> > tasks;
 };
 
 #endif
