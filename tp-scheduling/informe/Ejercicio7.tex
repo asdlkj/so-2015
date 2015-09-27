@@ -1,12 +1,10 @@
 \section{Ejercicio 7}
 \subsection{Desarrollo}
-Analizamos con varios grupos de tareas el comportamiento de $SchedMistery$ para llegar a los siguientes resultados:
+Analizamos con varios grupos de tareas el comportamiento de $SchedMistery$ para llegar a los siguientes resultados. Llamar\'e E a las entradas.
 
 \begin{enumerate}[(a)]
 
-\item El scheduler $SchedMistery$ es un RoundRobin con colas de prioridad. Llamar\'e E a las entradas.
-
-\item Siempre se ejecutan las tareas de la cola no vac\'ia de menor prioridad.
+\item $SchedMistery$ es un scheduler de Multiples Colas con prioridad.
 
 \item Siendo N la cantidad de entradas que se le da al programa (\#E), el SchedMistery tendr\'a N+1 colas de prioridad, siendo la primera de 1 tick y el quantum del resto corresponde a los valores ingresados.
 
@@ -33,8 +31,12 @@ N+1 & $E_N$ 		& 1\\
 \end{tabular}
 \end{table}
 
+\item Siempre se ejecutan las tareas de la cola no vac\'ia de menor prioridad.
+
 \item Si una tarea corre el quantum completo (i.e. no se bloquea o termina) y hay una cola de prioridad menor, la tarea es eliminada de la cola E$_i$ en la que se encuentra y pasa a la cola E$_{i+1}$.\\
 	Si estaba en la cola de prioridad 1 (i.e. la \'ultima cola), se queda en ella.
+	
+\item Las tareas que corren el quantum completo en la \'ultima cola pasan al final de la cola, funcionando como un $Round Robin$ con el quantum de la \'ultima cola.
 	
 \item Si una tarea es bloqueada, es eliminada de la cola en la que se encuentra y pasa a la cola E$_{i-1}$ salvo que se encuentre en la primer cola. En cuyo caso se la vuelve a agregar al final de la misma.
 
