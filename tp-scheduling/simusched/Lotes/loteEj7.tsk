@@ -1,5 +1,6 @@
 TaskCPU 50
 TaskCPU 70
+TaskBatch 70 3
 @40:
 TaskIO 40 25
 TaskIO 15 35

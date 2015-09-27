@@ -4,24 +4,45 @@ Analizamos con varios grupos de tareas el comportamiento de $SchedMistery$ para 
 
 \begin{enumerate}[(a)]
 
-\item El scheduler $SchedMistery$ es un RoundRobin modificado
+\item El scheduler $SchedMistery$ es un RoundRobin con colas de prioridad. Llamar\'e E a las entradas.
 
-\item La modificación se da en el tiempo que se le permite correr a cada tarea antes de ser desalojada
+\item Siempre se ejecutan las tareas de la cola no vac\'ia de menor prioridad.
 
-\item Dicha modificación tiene en cuenta dos cosas: los parámetros de entrada del programa y si quedan otras tareas que pueden correr.
+\item Siendo N la cantidad de entradas que se le da al programa (\#E), el SchedMistery tendr\'a N+1 colas de prioridad, siendo la primera de 1 tick y el quantum del resto corresponde a los valores ingresados.
 
-\item Si no hay otras tareas que puedan correr no hay desalojo, la tarea Idle sólo aparece cuando no hay tareas que puedan correr.
+\item La cola de quantum 1 es la de mayor prioridad y el resto de colas va decendiendo su prioridad en el orden que se ingresan.
 
-\item En cuanto a los tiempos de ejecución de cada tarea, la primera aparición de la tarea es de un tick de reloj, mientras que el resto equivale al valor de la entrada, tomada secuencialmente (explicado más abajo con los gráficos)
+Ej: Siendo prioridad N+1 la m\'as alta
+\begin{table}[H]
+\centering
+\begin{tabular}{ | c | c | c |}
+  \hline			
+  Cola N$^{ro}$ & quantum & prioridad\\
+  \hline
+1 	& 1 			& N+1\\
+2 	& $E_1$ 		& N\\
+3 	& $E_2$ 		& N-1\\
+4 	& $E_3$ 		& N-2\\
+5 	& $E_4$ 		& N-3\\
+  \hline
+i 	& $E_{i-1}$ 	& N-i+2\\
+  \hline
+N+1 & $E_N$ 		& 1\\
+  \hline
 
-\item Las ejecuciones de las tareas fuera de los tiempos dados en la entrada del programa son iguales a la última corrida correspondiente a los valores de la entrada.
+\end{tabular}
+\end{table}
 
-\item De no haber otras tareas que puedan ejecutarse, se siguen contando los valores de los parámetros de entrada
+\item Si una tarea corre el quantum completo (i.e. no se bloquea o termina) y hay una cola de prioridad menor, la tarea es eliminada de la cola E$_i$ en la que se encuentra y pasa a la cola E$_{i+1}$.\\
+	Si estaba en la cola de prioridad 1 (i.e. la \'ultima cola), se queda en ella.
+	
+\item Si una tarea es bloqueada, es eliminada de la cola en la que se encuentra y pasa a la cola E$_{i-1}$ salvo que se encuentre en la primer cola. En cuyo caso se la vuelve a agregar al final de la misma.
 
 \end{enumerate}
 
 \subsection{Experimentación}
 
+\begin{comment}
 Ahora mostraremos de donde obtuvimos la información antes mencionada
 
 Los lotes utilizados fueron:\\
@@ -72,3 +93,4 @@ En esta figura se puede ver claramente que es un Round Robin y que los tiempos q
   \caption{Se pueden apreciar (a)(b)(c)(e)(f)(g)}
   \label{fig:test3ej7}
 \end{figure}
+\end{comment}
