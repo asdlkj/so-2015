@@ -6,177 +6,92 @@
 
 using namespace std;
 
-typedef std::tuple<int, int>  tarea;	//pid, tiempo que lleva corriendo
-typedef pair<int, int> _pid;	//pid = pair<pid, lista en la q esta (y si la tarea esta blokeada es la lista a la que ira)>
-
-#define BUSY 0
-#define FREE 1
-#define _PID get<0>
-#define _tiempoCorriendo get<1>
-
 
 SchedNoMistery::SchedNoMistery(vector<int> argn) {
-	tiempos.resize(argn.size());
-	cerr << "Antes de task.resize(argn.size())" << endl;
-	//tasks.resize(argn.size());
-	list<tarea> aux;
-	cerr << "Dsp de task.resize(argn.size())" << endl;
-	for (unsigned int i = 0; i < argn.size(); i++)
-	{
-		tiempos[i] = argn[i];	//en tiempos guardo los distintos quantum
+	tarea id;
+	id.pid = IDLE_TASK;
+	id.nivel = 0;
+
+	Actual = id;
+	quantumRestante = 0;
+	//quantums.push_back(1);
+	//queue<tarea> q;
+	//tareas.push_back(q);
+	for(unsigned int i=0; i<argn.size() ;i++){
+		queue<tarea> r;
+		tareas.push_back(r);
+		quantums.push_back(argn[i]);
 	}
-	for (unsigned int i = 0; i < argn.size(); i++)
-	{
-		cerr << i <<") Antes de task.push_back(aux)" << endl << endl;
-		tasks.push_back(aux);
-		cerr << i <<") Dsp de task.push_back(aux)" << endl;
-	}
-	listaMenor = 0;
+	
 }
 
 void SchedNoMistery::load(int pid) {
-	//cargo las tareas con su pid
-	tarea tareaAux = make_tuple (pid, 0);
-	tasks[0].push_back(tareaAux);
-	dicTareas.push_back(make_pair(pid, 0));
+	tarea nueva;
+	nueva.pid = pid;
+	nueva.nivel = 0;
+	tareas[0].push(nueva);
 }
 
 void SchedNoMistery::unblock(int pid) {
-	//cuando una tarea se desblokea busco a que lista agregarla
-	for (list<_pid>::iterator it2 = dicTareas.begin(); it2 != dicTareas.end(); ++it2)
-	{
-		if (pid == it2->first)
-		{
-			tarea tareaAux = make_tuple(pid, 0);
-			tasks[it2->second].push_back(tareaAux);	//no recuero cuanto llevaba corriendo, siempre hace borron y cuenta nueva
-			
-			if (it2->second < listaMenor)
-				{listaMenor = it2->second;}
+	for(int i = 0; i<bloqueados.size() ;i++){
+		if(bloqueados[i].pid == pid){
+
+			tarea desbloqueada = bloqueados[i];
+			bloqueados.erase(bloqueados.begin() + i);
+
+			if(desbloqueada.nivel != 0){
+				desbloqueada.nivel -= 1; 
+				tareas[desbloqueada.nivel].push(desbloqueada);
+			}
+			else{
+				tareas[desbloqueada.nivel].push(desbloqueada);
+			}
 		}
-	}	
+	}
+
 }
 
 int SchedNoMistery::tick(int cpu, const enum Motivo m) {
-			cerr << "incha huevo: " << (int)tasks.size() << " =? "  << tasks.size() << endl;
-	int pid = current_pid(cpu);
-	if (pid != IDLE_TASK)
-	{
-		for (it = tasks[listaMenor].begin() ; it != tasks[listaMenor].end() ; ++it)
-		{
-			if (_PID(*it) == pid) //siempre deberia ser la primer tarea de la primer lista utilizada
-				{break;}
+	if(m == TICK){
+		if(quantumRestante > 1){
+			quantumRestante--;
+			return Actual.pid;
 		}
-	}
-	 
-	if (m == BLOCK)	//no puede (pid == IDLE_TASK)
-	{
-		//tengo guardado la lista de menor nivel, de dnd se ejecuto la tarea ahora bloqueada
+		if(Actual.pid != IDLE_TASK){
+			if(Actual.nivel + 1 == tareas.size()){ //Si ya estoy en el ultimo
+				tareas[Actual.nivel].push(Actual);
+			}
+			else{
+				Actual.nivel++;
+				tareas[Actual.nivel].push(Actual);
+			}
 				
-				
-		//cuando se bloquea pasa a la lista de tareas anterior
-		for (list<_pid>::iterator it2 = dicTareas.begin(); it2 != dicTareas.end(); ++it2)
-		{
-			if (pid == it2->first)
-				{it2->second = max(listaMenor - 1, 0);}
 		}
 
-		it = tasks[listaMenor].erase(it);	//incluye ++it
-		
-		if (it == tasks[listaMenor].end())
-			tasks[listaMenor].begin();
-			
+	}
+	else if(m == BLOCK){
+		if(Actual.pid != IDLE_TASK){
+			bloqueados.push_back(Actual);
+			Actual.pid = IDLE_TASK;
+			Actual.nivel = 0;
+			quantumRestante = 0;
+		}
+	}
+	else if(m == EXIT){
 
-		
-		int menorAux = listaMenor;
-		
-		while((listaMenor + 1) < (int)tasks.size() && tasks[listaMenor].empty())	{listaMenor++;}
-		
-		//si sale de este while sin la lista correta es porque todas las tareas estan bloqueadas => idle
-		if(tasks[listaMenor].empty())
-			{return IDLE_TASK;}
-		else
-		{
-			if (menorAux != listaMenor)
-				it = tasks[listaMenor].begin();
-			
-			return _PID(*it);
+	}
+
+	Actual.pid = IDLE_TASK;
+	Actual.nivel = 0;
+
+	for(unsigned int i = 0; i<tareas.size() ;i++){  //Busco en las colas la primera que no este vacia.
+		if(!tareas[i].empty()){
+			Actual = tareas[i].front();
+			quantumRestante = quantums[Actual.nivel];
+			tareas[i].pop();
+			break;
 		}
 	}
-	else
-	{
-		if (m == EXIT)	//no puede (pid == IDLE_TASK)
-		{
-			//tengo guardado la lista de menor nivel, de dnd se ejecuto la tarea ahora bloqueada
-			it = tasks[listaMenor].erase(it);	//incluye ++it
-			
-			if (it == tasks[listaMenor].end())
-				tasks[listaMenor].begin();
-			
-			//diferencia con bloquear: saco la tarea de list<_pid> dicTareas
-			for (list<_pid>::iterator it2 = dicTareas.begin() ; it2 != dicTareas.end() ; ++it2)
-			{
-				if (pid == it2->first)
-				{
-					it2 = dicTareas.erase(it2);	//incluye ++it2
-					break;
-				}
-			}				
-			
-			int menorAux = listaMenor;
-			
-			while((listaMenor + 1) < (int)(tasks.size()) && tasks[listaMenor].empty())	{listaMenor++;}
-			
-			//si sale de este while sin la lista correta es porque todas las tareas estan bloqueadas => idle
-			if(tasks[listaMenor].empty())
-				{return IDLE_TASK;}
-			else
-			{
-				if (menorAux != listaMenor)
-					it = tasks[listaMenor].begin();
-				
-				return _PID(*it);
-			}
-		}
-		else
-		{
-			// m == TICK
-			if (pid != IDLE_TASK)
-			{
-				//veo si cambio de tarea
-				_tiempoCorriendo(*it)++; //el tick del reloj que acaba de ocurrir
-				if (_tiempoCorriendo(*it) >= tiempos[listaMenor])
-				{
-					//si se le acaba el tiempo paso la tarea a la siguiente lista
-					_tiempoCorriendo(*it) = 0;
-					tasks[min(listaMenor+1, (int)tasks.size())].push_back(*it);	
-					tasks[listaMenor].erase(it);
-					
-					//ahora veo a q tarea le toca seguir
-					
-					int menorAux = listaMenor;
-					while((listaMenor + 1) < (int)(tasks.size()) && tasks[listaMenor].empty())	{listaMenor++;}
-					//si listaMenor al final del while es distinto a menorAux o a menorAux+1 => error
-					if(tasks[listaMenor].empty() || (listaMenor != menorAux && listaMenor != menorAux +1))
-					{
-						cerr << "Error al mover una tarea a la cola siguiente" << endl;
-					}
-					else
-					{
-						if (menorAux != listaMenor)
-							it = tasks[listaMenor].begin();
-						
-						return _PID(*it);
-					}
-				}
-				// sino, no pasa nada y sigue corriendo el mismo programa
-				return pid;
-			}
-			else
-			{
-				//estaba en IDLE. O sea que se desbloqueo una tarea
-				it = tasks[listaMenor].begin();
-				return _PID(*it);
-			}
-		}
-	}
+
+	return Actual.pid;
 }
