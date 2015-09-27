@@ -67,19 +67,13 @@ void TaskBatch(int pid, vector<int> params){//params: total_cpu y cant_bloqueos
 		sort(momentoABloquear.begin(), momentoABloquear.end());
 		//Realizo el proceso de cpu y bloqueos
 		i = 0;
-		int cpu_acum = 0;
 		for(int j = 0; j < total_cpu; j++){
 			if(momentoABloquear[i] == j){
-				if(cpu_acum != 0){
-					uso_CPU(pid, cpu_acum);
-					cpu_acum = 0;
-				}
 				uso_IO(pid, 1);
 				i++;
 			}
 			else{
-				cpu_acum++;
-				//uso_CPU(pid, 1);
+				uso_CPU(pid, 1);
 			}
 		}
 	}
