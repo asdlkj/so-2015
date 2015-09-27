@@ -68,15 +68,15 @@ void TaskBatch(int pid, vector<int> params){//params: total_cpu y cant_bloqueos
 		//Realizo el proceso de cpu y bloqueos
 		i = 0;
 		for(int j = 0; j < total_cpu; j++){
-			if(momentoABloquear[i] == j){
+			if(momentoABloquear[i] == j){  //Si estoy en el que tengo que bloquear, bloqueo.
 				uso_IO(pid, 1);
 				
 				i++;
-				if(i+1 == momentoABloquear.size()){
+				if(i == momentoABloquear.size()){ //Si llego al ultimo de los bloqueados, no aumento el indice.
 					i--;
 				}
 			}
-			else{
+			else{  //De lo contrario ejecuto cpu.
 				uso_CPU(pid, 1);
 			}
 		}

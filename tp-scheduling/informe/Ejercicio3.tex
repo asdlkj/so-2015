@@ -6,8 +6,8 @@
 Para poder resolver el problema de TaskBatch lo que hacemos es generar cant$\_$bloqueos valores aleatorios no repetidos que no estén ubicados fuera de total$\_$cpu. Usando la
 función rand y en cada momento guardarnos el resultado en un vector. Siempre revisamos los valores hasta el que estamos agregando para asegurarnos de que no estamos repitiendo
 ninguno. Lo generado por esto podría no estar ordenado, así que le hacemos un sort al resultado. Por último ciclaremos total$\_$cpu veces y en las posiciones donde se tendría que 
-bloquear(que estén en el vector que nos armamos) hacemos la llamada usa$\_$IO con duración de 1. Si caemos en el caso donde no se debe hacer ninguna llamada bloqueante, 
-entonces simplemente ejecutamos usa$\_$CPU con total$\_$cpu de tiempo.
+bloquear(que estén en el vector que nos armamos) hacemos la llamada usa$\_$IO con duración de 1, en caso contrario hacemos usa$\_$CPU con duración de 1. En el caso en el que no 
+se tengan que ejecutar ninguna llamada bloqueante simplemente hacemos usa$\_$CPU con duración total$\_$cpu.
 
 \subsection{Experimentación}
 
@@ -33,7 +33,25 @@ Podemos ver que la primer tarea ejecuta 10 llamadas bloqueantes y que cada una t
 \begin{figure}[H]
   \centering
     \includegraphics[width=1.1\textwidth]{imagenes/Ej3Experimento2.png}
-  \caption{loteEj3.tsk con FCFS con dos cores}
+  \caption{loteEj3.tsk con FCFS con un core (segundo intento)}
 \end{figure}
 
 Para poder asegurar la aleatoriedad del TaskBatch ejecutamos nuevamente con el mismo lote de tareas y observamos que las llamadas bloqueante aperecen en momentos diferentes.
+
+Ahora hacemos el mismo experimento para dos cores.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=1.1\textwidth]{imagenes/Ej3Experimento3.png}
+  \caption{loteEj3.tsk con FCFS con dos cores}
+\end{figure}
+
+Nuevamente observamos que se realizan las 10, 6 y 14 llamadas bloqueantes de duración 1 para las tres tareas. A continuación se muestra la segunda ejecución para mostrar 
+que es aleatoria.
+
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=1.1\textwidth]{imagenes/Ej3Experimento4.png}
+  \caption{loteEj3.tsk con FCFS con dos cores(segundo intento)}
+\end{figure}
