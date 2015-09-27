@@ -1,6 +1,9 @@
 \section{Ejercicio 7}
 \subsection{Desarrollo}
-Analizamos con varios grupos de tareas el comportamiento de $SchedMistery$ para llegar a los siguientes resultados. Llamar\'e E a las entradas.
+En \'este ejercicio deb\'amos deducir que caracter\'isticas ten\'ia el $SchedMistery$ y reproducir su c\'odigo en $SchedNoMistery$. Para lo primero creamos varios lotes donde incl\'amos muchas tareas del mismo tipo, y luego hicimos combinaciones de tipos de tareas.
+
+Al completar \'esta serie de tests pudimos deducir las caracter\'isticas que enumeramos a continuaci\'on. Llamaremos E a los valores que se le pasa al scheduler.\\
+
 
 \begin{enumerate}[(a)]
 
@@ -31,86 +34,97 @@ N+1 & $E_N$ 		& 1\\
 \end{tabular}
 \end{table}
 
-\item Siempre se ejecutan las tareas de la cola no vac\'ia de menor prioridad.
+\item Siempre se ejecuta la primer tarea en Ready de la cola no vac\'ia de mayor prioridad.
 
 \item Si una tarea corre el quantum completo (i.e. no se bloquea o termina) y hay una cola de prioridad menor, la tarea es eliminada de la cola E$_i$ en la que se encuentra y pasa a la cola E$_{i+1}$.\\
 	Si estaba en la cola de prioridad 1 (i.e. la \'ultima cola), se queda en ella.
 	
-\item Las tareas que corren el quantum completo en la \'ultima cola pasan al final de la cola, funcionando como un $Round Robin$ con el quantum de la \'ultima cola.
+\item Las tareas que corren el quantum completo en la \'ultima cola pasan al final de la cola, funcionando como un $Round Robin$ con el quantum de \'esa cola.
 	
 \item Si una tarea es bloqueada, es eliminada de la cola en la que se encuentra y pasa a la cola E$_{i-1}$ salvo que se encuentre en la primer cola. En cuyo caso se la vuelve a agregar al final de la misma.
 
 \end{enumerate}
 
-Para hacer SchedNoMistery utilizamos un vector de colas, de nombre tareas, y otro vector de quantums. Tienen el mismo tamaño y están balanceados el uno con el otro, es decir que si accedes a la posición i de tareas en la misma de quantums estará el tiempo de procesador de la cola. 
+\subsubsection{Ejemplos y tests}
 
-Luego tenemos una estructura tarea que consiste en el pid del proceso y el índice de la cola a la que pertenece en tareas. Tendremos una tarea de nombre Actual, que es la que está corriendo, el quantum restante de la misma. Y por ultimo un vector de tarea que contiene las tareas que están actualmente bloqueadas, esta tiene el nombre de bloqueados.
-
-El proceso load lo que hará es sencillamente crear la nueva tarea y encolarla en la primera cola(mayor prioridad)
-
-Por otro lado, unblock se encargará de buscar el pid dado en el vector bloqueados y, cuando lo encuentra, lo quita de allí. La estructura tarea obtenida ahora debe ser pasada a la cola anterior a la que se encontraba cuando fue bloqueada (si es que no es la primera, en cuyo caso se queda en la misma).
-
-Para terminar, tenemos tick. Para los tres motivos esto es lo que hace:
-
-TICK: Si todavía me queda quantum en la tarea actual entonces disminuyo este en 1 y retorno el pid de Actual. Si no es el caso entonces, guardo la tarea en la siguiente cola a la que estaba (si es que la hay). Busco entre las colas de tareas la primera que no esté vacía y pongo esa tarea a ejecutar. En el caso que no aya simplemente le pongo a la actual el pid de IDLE y de quantum 0.
-
- BLOCK: Si la tarea no se encontraba bloqueada, la añado al vector bloqueados. Después repito el ultimo paso de TICK y me fijo si hay alguien para ejecutar.
-
-EXIT: Hago lo mismo que los anteriores al final y me fijo si hay alguien para ejecutar.
-
-
-
-\subsection{Experimentación}
-
-\begin{comment}
-Ahora mostraremos de donde obtuvimos la información antes mencionada
-
-Los lotes utilizados fueron:\\
-
-loteEj7a.tsk\\
-TaskCPU 18\\
-TaskCPU 18\\
-TaskCPU 18\\
-TaskCPU 18\\
-
-
-loteEj7b.tsk\\
-\#Tarea intensiva de CPU 1\\
-TaskCPU 18\\
-\#Tarea intensiva de CPU 2\\
-@7:\\
-TaskCPU 20\\
-\#Tarea interactiva 1\\
-TaskConsola 4 3 6\\
-\#Tarea interactiva 2\\
-TaskConsola 8 2 7 \\
-
-
-
-
+Los siguientes son 3 lotes de tareas que ejemplifican las propiedades antes mencionadas. Los lotes reales que se usaron para la deducci\'on son muchos y variados, y no aportan mayor informaci\'on que los presentados a continuaci\'on:\\
+\newpage
+Lote loteEj7a.tsk:
+\begin{table}[H]
+\begin{tabular}{ | l |}
+  \hline
+TaskCPU 30\\
+TaskCPU 30\\
+TaskCPU 30\\
+TaskConsola 5 3 3\\
+TaskConsola 5 3 3\\
+  \hline
+\end{tabular}
+\end{table}
 
 \begin{figure}[H]
   \centering
-    %\includegraphics[width=1.1\textwidth]{imagenes/test1ej7.png}
-  \caption{Se pueden apreciar (a)(b)(e)(f)}
+    \includegraphics[width=1.1\textwidth]{imagenes/test3ej7.png}
+ \caption{loteEj7a.tsk}
   \label{fig:ej7a}
 \end{figure}
 
-En esta figura se puede ver claramente que es un Round Robin y que los tiempos que toman las tareas cada vez que entran en Ready son 1, 3, 2, 4, 4.. Luego de la cuarta vez que el scheduller pone a correr la tarea, siempre le da 4 tics de reloj
+En \'esta figura se puede ver como el algoritmo hace ejecutar a las tareas TaskCPU primero 1 tick y luego la cantidad de ticks pasados como argumento. Finalmente, luego de hacer la primer corrida de 3 ticks vuelven a correr la misma cantidad como en un RR.
 
+En las tareas TaskConsola s\'olo se observa que tienen mayor prioridad luego de la primer corrida, y que al estar bloqueadas dan paso a las tareas de menor prioridad.\\
+
+
+
+Lote loteEj7b.tsk:
+\begin{table}[H]
+\begin{tabular}{ | l |}
+  \hline
+TaskCPU 50\\
+TaskCPU 70\\
+TaskBatch 70 3\\
+@40:\\
+TaskIO 40 25\\
+TaskIO 15 35\\
+@120:\\
+TaskCPU 40\\
+TaskCPU 35\\
+  \hline
+\end{tabular}
+\end{table}
 
 \begin{figure}[H]
   \centering
-    %\includegraphics[width=1.1\textwidth]{imagenes/test2ej7.png}
-  \caption{Se pueden apreciar (a)(b)(d)}
-  \label{fig:test2ej7}
+    \includegraphics[width=1.1\textwidth]{imagenes/test1ej7.png}
+  \caption{loteEj7b.tsk}
+  \label{fig:ej7b}
 \end{figure}
 
+En la figura \ref{fig:ej7b} se puede observar adem\'as de los comportamientos antes mencionados que las tareas bloqueadas pasan a la cola siguiente 
+de mayor prioridad. \'Esto se observa siguiendo las prioridades de las tareas bloqueadas, principalmente la tarea TaskBatch.\\
+
+
+
+Lote loteEj7c.tsk:
+\begin{table}[H]
+\begin{tabular}{ | l |}
+  \hline
+TaskBatch 80 2\\
+TaskBatch 80 2\\
+TaskBatch 80 2\\
+TaskBatch 80 2\\
+  \hline
+\end{tabular}
+\end{table}
 
 \begin{figure}[H]
   \centering
-    %\includegraphics[width=1.1\textwidth]{imagenes/test3ej7.png}
-  \caption{Se pueden apreciar (a)(b)(c)(e)(f)(g)}
-  \label{fig:test3ej7}
+    \includegraphics[width=1.1\textwidth]{imagenes/test2ej7.png}
+  \caption{loteEj7c.tsk}
+  \label{fig:ej7c}
 \end{figure}
-\end{comment}
+
+
+Para ejemplificar mejor lo antes dicho creamos este caso donde s\'olo se ejecutan TaskBatch. Con esto podemos ver los cambios de prioridad de las tareas.
+
+
+\subsection{Experimentación}
