@@ -128,3 +128,30 @@ Para ejemplificar mejor lo antes dicho creamos este caso donde s\'olo se ejecuta
 
 
 \subsection{Experimentación}
+
+Veremos que el $SchedNoMistery$ se comporta igual que el $SchedMistery$:
+
+La ejecuci\'on de $SchedNoMistery$ para los ejemplos anteriores son efectivamente los mismos:
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=1.1\textwidth]{imagenes/Ej7verif1.png}
+ \caption{loteEj7a.tsk con SchedNoMistery}
+  \label{fig:ej7aNo}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=1.1\textwidth]{imagenes/Ej7verif2.png}
+ \caption{loteEj7b.tsk con SchedNoMistery}
+  \label{fig:ej7bNo}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=1.1\textwidth]{imagenes/Ej7verif3.png}
+ \caption{loteEj7c.tsk con SchedNoMistery}
+  \label{fig:ej7cNo}
+\end{figure}
+
+Se puede observar que s\'olo se comportan distintos los TaskBatch. Pero eso es porque TaskBatch se bloquea de forma pseudo-aleatoria, seg\'un sus par\'ametros.
