@@ -46,9 +46,20 @@ void SchedNoMistery::unblock(int pid) {
 			else{
 				tareas[desbloqueada.nivel].push(desbloqueada);
 			}
+			break;
 		}
 	}
 
+}
+
+bool SchedNoMistery::estaBloqueado(int pid){
+	for(int i = 0; i<bloqueados.size() ;i++){
+		if(bloqueados[i].pid == pid){
+
+			return true;
+		}
+	}
+	return false;
 }
 
 int SchedNoMistery::tick(int cpu, const enum Motivo m) {
@@ -70,12 +81,13 @@ int SchedNoMistery::tick(int cpu, const enum Motivo m) {
 
 	}
 	else if(m == BLOCK){
-		if(Actual.pid != IDLE_TASK){
+		if((!estaBloqueado(Actual.pid))){
 			bloqueados.push_back(Actual);
 			Actual.pid = IDLE_TASK;
 			Actual.nivel = 0;
 			quantumRestante = 0;
 		}
+		//return IDLE_TASK;
 	}
 	else if(m == EXIT){
 

@@ -28,7 +28,7 @@ class SchedNoMistery : public SchedBase {
 			int pid;
 			int nivel;
 		};
-		
+		bool estaBloqueado(int pid);
 		tarea Actual;
 		int quantumRestante;
 		vector<queue<tarea>> tareas;
