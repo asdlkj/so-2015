@@ -1,10 +1,8 @@
-TaskCPU 110
-TaskCPU 110
-TaskBatch 110 1
-@20:
-TaskConsola 10 4 6
-TaskIO 20 65
-TaskIO 15 35
+TaskCPU 50
+TaskCPU 70
 @40:
-TaskCPU 110
-TaskCPU 110
+TaskIO 40 25
+TaskIO 15 35
+@120:
+TaskCPU 40
+TaskCPU 35
