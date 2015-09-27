@@ -40,6 +40,24 @@ N+1 & $E_N$ 		& 1\\
 
 \end{enumerate}
 
+Para hacer SchedNoMistery utilizamos un vector de colas, de nombre tareas, y otro vector de quantums. Tienen el mismo tamaño y están balanceados el uno con el otro, es decir que si accedes a la posición i de tareas en la misma de quantums estará el tiempo de procesador de la cola. 
+
+Luego tenemos una estructura tarea que consiste en el pid del proceso y el índice de la cola a la que pertenece en tareas. Tendremos una tarea de nombre Actual, que es la que está corriendo, el quantum restante de la misma. Y por ultimo un vector de tarea que contiene las tareas que están actualmente bloqueadas, esta tiene el nombre de bloqueados.
+
+El proceso load lo que hará es sencillamente crear la nueva tarea y encolarla en la primera cola(mayor prioridad)
+
+Por otro lado, unblock se encargará de buscar el pid dado en el vector bloqueados y, cuando lo encuentra, lo quita de allí. La estructura tarea obtenida ahora debe ser pasada a la cola anterior a la que se encontraba cuando fue bloqueada (si es que no es la primera, en cuyo caso se queda en la misma).
+
+Para terminar, tenemos tick. Para los tres motivos esto es lo que hace:
+
+TICK: Si todavía me queda quantum en la tarea actual entonces disminuyo este en 1 y retorno el pid de Actual. Si no es el caso entonces, guardo la tarea en la siguiente cola a la que estaba (si es que la hay). Busco entre las colas de tareas la primera que no esté vacía y pongo esa tarea a ejecutar. En el caso que no aya simplemente le pongo a la actual el pid de IDLE y de quantum 0.
+
+ BLOCK: Si la tarea no se encontraba bloqueada, la añado al vector bloqueados. Después repito el ultimo paso de TICK y me fijo si hay alguien para ejecutar.
+
+EXIT: Hago lo mismo que los anteriores al final y me fijo si hay alguien para ejecutar.
+
+
+
 \subsection{Experimentación}
 
 \begin{comment}
