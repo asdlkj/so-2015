@@ -70,7 +70,11 @@ void TaskBatch(int pid, vector<int> params){//params: total_cpu y cant_bloqueos
 		for(int j = 0; j < total_cpu; j++){
 			if(momentoABloquear[i] == j){
 				uso_IO(pid, 1);
+				
 				i++;
+				if(i+1 == momentoABloquear.size()){
+					i--;
+				}
 			}
 			else{
 				uso_CPU(pid, 1);
