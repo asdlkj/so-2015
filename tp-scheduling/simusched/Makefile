@@ -43,8 +43,8 @@ ejercicio5:
 ejercicio6:
 	./simusched Lotes/loteEj5.tsk 1 2 1 SchedFCFS | ./graphsched.py > Lotes/imagenes/Ej6.png 
 ejercicio7:
-	./simusched Lotes/loteEj7.tsk 1 1 1 SchedMistery 2 | ./graphsched.py > Lotes/imagenes/Ej7.png 
-	./simusched Lotes/loteEj7.tsk 1 1 1 SchedNoMistery 2 | ./graphsched.py > Lotes/imagenes/Ej7.png 
+	./simusched Lotes/loteEj7.tsk 1 1 1 SchedMistery 2 | ./graphsched.py > Lotes/imagenes/Ej71.png 
+	./simusched Lotes/loteEj7.tsk 1 1 1 SchedNoMistery 2 | ./graphsched.py > Lotes/imagenes/Ej72.png 
 ejercicio8:
 	./simusched Lotes/loteEj8Experimento1.tsk 2 1 1 SchedRR 5 5| ./graphsched.py > Lotes/imagenes/Ej8Experimento1.png
 	./simusched Lotes/loteEj8Experimento1.tsk 2 1 1 SchedRR2 5 5| ./graphsched.py > Lotes/imagenes/Ej8Experimento2.png
