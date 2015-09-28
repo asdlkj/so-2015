@@ -45,8 +45,6 @@ internet. Las llamadas bloqueantes son entre 2 y 4.
 Hay que aclarar que las latencias podrían variar ya que TaskConsola genera las llamadas bloqueantes con un tamaño aleatorio entre 2 y 4. Podemos ver que en el primer caso se
 debe esperar hasta que el algoritmo complejo termine para poder escuchar musica y , a su vez, que esto termine para poder navegar por internet. En el segundo caso, vemos que 
 se puede ejecutar el algoritmo complejo y escuchar la canción al mismo tiempo, pero se debe terminar la canción para poder navegar por internet. Este último es mejor porque
-la canción y navegar por internet tienen latencias menores. 
-
-Rolando va a tener muchos problemas para ejecutar esto con un solo núcleo ya que mientras se este ejecutando el cpu no se podrá hacer ninguna de las otras cosas, que es lo que él
+la canción y navegar por internet tienen latencias menores. Rolando va a tener muchos problemas para ejecutar esto con un solo núcleo ya que mientras se este ejecutando el cpu no se podrá hacer ninguna de las otras cosas, que es lo que él
 pretende. Una buena solución sería tener 3 núcleos para que las tres cosas se puedan hacer al mismo tiempo. Otra sería usar Round-Robin para poder ir alternando los procesos y 
 que no tenga que esperar que uno termine para poder ir ejecutando los otros.
